@@ -14,7 +14,7 @@ import cucumber.junit.Cucumber;
 //@Cucumber.Options(format = {"pretty", "html:target/cucumber-html-report", "json-pretty:target/cucumber-report.json"})
 
 //Below is to run an individual test
-@Cucumber.Options(features = "classpath:cucumber/msdc/datepicker_23.feature", format = {"pretty", "html:target/cucumber-html-report", "json-pretty:target/cucumber-report.json"})
+@Cucumber.Options(features = "classpath:cucumber/msdc/competitions_6.feature", format = {"pretty", "html:target/cucumber-html-report", "json-pretty:target/cucumber-report.json"})
 
 public class RunCukesTest {
 

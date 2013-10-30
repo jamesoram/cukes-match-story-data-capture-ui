@@ -12,31 +12,16 @@
 
 Feature: As a Sports Information Processor I want to see the list of Competitions so I can select the Match to work on
 
-  
 Scenario: 01 - Verifying default competition as Barclays Premier League and choose another competition from the list
   Given I am on the home page
-  When I click on the down arrow from the Competition field
-  Then I should see the following:
-  |Competition              |
-  |Barclays Premier League  |
-   
+  Then I should see competition "Barclays Premier League" as default
 
+   
 Scenario: 02 - Selecting a different competition from the list
   Given I am on the home page
-  When I click on the down arrow from the competitions list
-  And I have the following selection:
-  |Competition            |
-  |UEFA Champions League  |
-  Then the drop down box is closed
-  And I have the following selection:
-  |Competition            |
-  |UEFA Champions League  |
-  
-
-  
-
-
-  
-
+  When I select competition "Barclays Premier League" and match date "Sun, 27 Oct, 2013"
+  And I change competition to "UEFA Champions League"
+  Then the match date should be different from "Sun, 27 Oct, 2013"
+ 
   
   

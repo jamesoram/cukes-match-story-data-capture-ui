@@ -1,12 +1,12 @@
 package cucumber.msdc.pages.models;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
+import org.openqa.selenium.support.ui.Select;
 
 /**
  * @author archanaa
@@ -14,58 +14,151 @@ import org.openqa.selenium.support.ui.WebDriverWait;
  */
 public class HomePage extends AbstractViewPage {
 
-	private static final String MEET_RACES_DIV_ID = "meetRaces";
-	public static final String DATE_INPUT_DIV_ID = "datePickDiv";
-	public static final String BODY_DIV_ID = "content";
-	public static final String CURRENT_DAY_DIV_ID = "onThisDay";
-	public static final String PAGE_TAB_DIV_ID = "pageTab";
-
-	public static final String XPATH_COUNTRY_MEETING_RACE = "id('%s')/table//tr[th/a/text()='%s']//td/a[text()='%s']";
-	public static final String XPATH_COUNTRY_INACTIVE_TAB = "id('%s')[contains(@class,'inactive')]";
-	public static final String XPATH_MEETING_VIEW_RACE_DETAILS = "id('meetRaces')/table//tr[td[1]='%s' and contains(td[2], '%s') and td[3]='%s']";
-	public static final String XPATH_MEETING_VIEW_RACE_LINK = "id('meetRaces')/table//tr[td[1]='%s']";
-
-	public static final String XPATH_RACETIMELINK = "//*[@id='UK_and_Ireland']/table/tbody/tr[1]/td[1]/a";
-
-	public static final String XPATH_RACE_ACTIVE_TAB_VIEW = "id('pageTab')/li[@class='active']/a[text()='%s']";
-	public static final String XPATH_RACE_TAB_VIEW = "id('pageTab')/li/a[text()='%s']";
+	
+	public static final String XPATH_DIV_WITH_CLASS="//div[@class=\"%s\"]";
+	
+	public static final String XPATH_SPAN_WITH_CLASS="//span[@class=\"%s\"]";
 
 	public HomePage(CukesApp cukesApp) {
 		super(cukesApp);
 	}
 	
+	public static class Fixture {
+		
+		private final String time;
+		private final String home;
+		private final String away;
+		private final String score;
+		
+		public Fixture(String time, String home,  String score, String away) {
+			this.time = time;
+			this.home = home;
+			this.away = away;
+			this.score = score;
+		}
+
+		public String getTime() {
+			return time;
+		}
+
+		public String getHome() {
+			return home;
+		}
+
+		public String getAway() {
+			return away;
+		}
+
+		public String getScore() {
+			return score;
+		}
+
+		@Override
+		public int hashCode() {
+			final int prime = 31;
+			int result = 1;
+			result = prime * result + ((away == null) ? 0 : away.hashCode());
+			result = prime * result + ((home == null) ? 0 : home.hashCode());
+			result = prime * result + ((score == null) ? 0 : score.hashCode());
+			result = prime * result + ((time == null) ? 0 : time.hashCode());
+			return result;
+		}
+
+		@Override
+		public boolean equals(Object obj) {
+			if (this == obj)
+				return true;
+			if (obj == null)
+				return false;
+			if (getClass() != obj.getClass())
+				return false;
+			Fixture other = (Fixture) obj;
+			if (away == null) {
+				if (other.away != null)
+					return false;
+			} else if (!away.equals(other.away))
+				return false;
+			if (home == null) {
+				if (other.home != null)
+					return false;
+			} else if (!home.equals(other.home))
+				return false;
+			if (score == null) {
+				if (other.score != null)
+					return false;
+			} else if (!score.equals(other.score))
+				return false;
+			if (time == null) {
+				if (other.time != null)
+					return false;
+			} else if (!time.equals(other.time))
+				return false;
+			return true;
+		}
+
+		@Override
+		public String toString() {
+			return "Fixture [time=" + time + ", home=" + home + ", away="
+					+ away + ", score=" + score + "]";
+		}
+		
+		
+		
+		
+	}
+	
 	
 
-	public void verifySelectedDayInDayNav(String day) {
-		By xpath = By
-				.xpath(String
-						.format("id('dateRange')//li[@class='active']//span[text()='%s']",
-								day));
-		WebElement webElement = getWebDriver().findElement(xpath);
-	}
 
-	public void verifySelectedCountryInCountryNav(String country) {
-		By xpath = By.xpath(String.format(
-				"id('dateRange')//li[@class='active']//span[text()='%s']",
-				country));
-		WebElement webElement = getWebDriver().findElement(xpath);
-	}
 
-	public void enterDateInDatePicker(String date) {
-		cukesApp.waitUntilVisibilityOfElementLocated(BODY_DIV_ID);
-		cukesApp.waitUntilVisibilityOfElementLocated(DATE_INPUT_DIV_ID);
-		getWebDriver().findElement(By.id(DATE_INPUT_DIV_ID)).clear();
-		System.out.println("Finding element: " + DATE_INPUT_DIV_ID);
-		getWebDriver().findElement(By.id(DATE_INPUT_DIV_ID)).sendKeys(date);
-		getWebDriver().findElement(By.id(DATE_INPUT_DIV_ID)).sendKeys(
-				Keys.RETURN);
-		// getWebDriver().findElement(By.id(DATE_INPUT_DIV_ID)).click();
+	public void enterDateInMatchDatePicker(String date) {
+		driver.findElement(By.id("match-date")).clear();
+		driver.findElement(By.id("match-date")).sendKeys(date);
+		driver.findElement(By.cssSelector("div.title.ng-scope")).click();
+		
 	}
 
 
+	public void selectCompetition(String competetion) {
+		new Select(driver.findElement(By.id("competition-list"))).selectByVisibleText(competetion);
+	}
+	
+	public Set<Fixture> getFixturesFromTable() {
+				
+		Set<Fixture> list = new HashSet<Fixture>();
+
+		List<WebElement> times = driver.findElements(By.xpath("//div[@class='game-date ng-binding']"));
+		List<WebElement> homeTeams = driver.findElements(By.xpath("//div[@class='home-team']/span"));
+		List<WebElement> awayTeams = driver.findElements(By.xpath("//div[@class='away-team']/span"));
+		List<WebElement> scores = driver.findElements(By.xpath("//div[@class='score ng-binding']"));
+		
+		for (int i=0; i<homeTeams.size(); i++) {
+			Fixture fixture = new Fixture(times.get(i).getText(), homeTeams.get(i).getText(), scores.get(i).getText(),  awayTeams.get(i).getText());
+			list.add(fixture);
+		}
+		
+		
+		return list;
+	}
 
 	
+	private By byDivXPath(String css) {
+		return By.xpath(String.format(XPATH_DIV_WITH_CLASS, css));
+	}
+	
+	
+	private By bySpanXPath(String css) {
+		return By.xpath(String.format(XPATH_SPAN_WITH_CLASS, css));
+	}
+	
+	public String getSelectedCompetition() {
+		cukesApp.waitUntilVisibilityOfElementLocated("competition-list");
+		return new Select(driver.findElement(By.id("competition-list"))).getFirstSelectedOption().getText();
+	}
 
+	public String getMatchDayDate() {
+		return driver.findElement(By.id("match-date")).getText();
+	}
 
 
 }
