@@ -1,0 +1,2 @@
+connectionUri=xcc://#MARKLOGIC.USER#:#MARKLOGIC.PASSWORD#@#MARKLOGIC.HOST#:#MARKLOGIC.XCC.PORT#
+#connectionUri=xcc://fr-ingestor:fr-ingestor@localhost:30000

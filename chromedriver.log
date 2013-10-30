@@ -1,0 +1,45 @@
+[0.000][INFO]:      ChromeDriver 23.0.1240.0 C:\Arc\cukes-match-story-data\src\test\resources\chromedriver.exe
+[1.112][FINE]:      Initializing session with capabilities {
+   "browserName": "chrome",
+   "chrome.switches": [  ],
+   "chromeOptions": {
+      "args": [  ],
+      "extensions": [  ]
+   },
+   "platform": "ANY",
+   "version": ""
+}
+
+[1.113][INFO]:      Launching chrome: "C:\Program Files\Google\Chrome\Application\chrome.exe" --enable-logging --log-level=1 --disable-hang-monitor --disable-prompt-on-repost --dom-automation --full-memory-crash-report --no-default-browser-check --no-first-run --disable-background-networking --disable-sync --disable-translate --disable-web-resources --safebrowsing-disable-auto-update --safebrowsing-disable-download-protection --disable-client-side-phishing-detection --disable-component-update --disable-default-apps --ignore-certificate-errors about:blank
+[2.107][INFO]:      Connected to Chrome successfully. Version: 30.0.1599.101
+[2.125][FINE]:      Command received (/session/372ebe7c8e0e0b27ca12a8f4e97280b3)
+[2.127][FINE]:      Command finished (/session/372ebe7c8e0e0b27ca12a8f4e97280b3) with response {
+   "sessionId": "372ebe7c8e0e0b27ca12a8f4e97280b3",
+   "status": 0,
+   "value": {
+      "acceptSslCerts": false,
+      "applicationCacheEnabled": false,
+      "browserConnectionEnabled": false,
+      "browserName": "chrome",
+      "chrome.chromedriverVersion": "23.0.1240.0",
+      "chrome.nativeEvents": false,
+      "cssSelectorsEnabled": true,
+      "databaseEnabled": false,
+      "handlesAlerts": true,
+      "javascriptEnabled": true,
+      "locationContextEnabled": false,
+      "nativeEvents": true,
+      "platform": "windows",
+      "rotatable": false,
+      "takesScreenshot": true,
+      "version": "30.0.1599.101",
+      "webStorageEnabled": true
+   }
+}
+
+[2.157][FINE]:      Command received (/session/372ebe7c8e0e0b27ca12a8f4e97280b3/timeouts/implicit_wait) with params {
+   "ms": 10000
+}
+
+[2.157][FINER]:     Waiting for all views to stop loading...
+[2.159][FINER]:     Done waiting for all views to stop loading
