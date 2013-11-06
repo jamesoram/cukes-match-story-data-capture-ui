@@ -467,7 +467,7 @@
 		</dependencies>
 	</dependencyManagement> -->
 	
-	<!-- the following is added by shahnaazr -->
+	<!-- the following dependencies added by shahnaazr -->
 	<name>msdc</name>
 
 	<description>match story data capture ui functional tests</description>

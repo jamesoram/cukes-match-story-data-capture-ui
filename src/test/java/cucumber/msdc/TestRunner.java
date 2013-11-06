@@ -11,6 +11,8 @@ import cucumber.api.junit.Cucumber;
 @version 1.0
  */
 
+
+@SuppressWarnings("deprecation")
 @RunWith(Cucumber.class)
 @Cucumber.Options(
 		format = {"html:target/cucumber-html-report/features/matchsummarypage" },
