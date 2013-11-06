@@ -1,5 +1,5 @@
 package cucumber.msdc.stepdefs;
-
+/*
 import junit.framework.Assert;
 import cucumber.annotation.After;
 import cucumber.annotation.Before;
@@ -7,9 +7,10 @@ import cucumber.annotation.en.Then;
 import cucumber.annotation.en.When;
 import cucumber.msdc.pages.models.HomePage;
 import cucumber.runtime.PendingException;
+*/
 
 public class CompetitionsSteps extends AbstractSteps {
-	
+	/*
 
 	@Before
 	public void setUp() {
@@ -38,6 +39,6 @@ public class CompetitionsSteps extends AbstractSteps {
 	public void the_match_date_should_be_different_from(String date) throws Throwable {
 		Assert.assertFalse(date.equals(cukesApp.getHomePage().getMatchDayDate()));
 	}
-
+*/
 
 }

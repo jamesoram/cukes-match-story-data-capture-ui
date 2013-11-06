@@ -3,10 +3,11 @@
  * 
  */
 package cucumber.msdc;
-
+/*
 import org.junit.runner.RunWith;
 
 import cucumber.junit.Cucumber;
+
 
 @RunWith(Cucumber.class)
 
@@ -15,7 +16,7 @@ import cucumber.junit.Cucumber;
 
 //Below is to run an individual test
 @Cucumber.Options(features = "classpath:cucumber/msdc/competitions_6.feature", format = {"pretty", "html:target/cucumber-html-report", "json-pretty:target/cucumber-report.json"})
-
+*/
 public class RunCukesTest {
 
 }

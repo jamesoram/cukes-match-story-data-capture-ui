@@ -1,11 +1,11 @@
 package cucumber.msdc.stepdefs;
 
 
-
-import cucumber.annotation.en.Given;
-import cucumber.annotation.en.Then;
+import cucumber.api.PendingException;
+import cucumber.api.java.en.Given;
+import cucumber.api.java.en.Then;
 import cucumber.msdc.pages.ConnectionManager;
-import cucumber.runtime.PendingException;
+
 
 
 /**

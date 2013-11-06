@@ -1,5 +1,5 @@
 package cucumber.msdc.stepdefs;
-
+/*
 import gherkin.formatter.model.DataTableRow;
 
 import java.util.Set;
@@ -15,13 +15,14 @@ import cucumber.msdc.pages.models.HomePage;
 import cucumber.msdc.pages.models.HomePage.Fixture;
 import cucumber.runtime.PendingException;
 import cucumber.table.DataTable;
-
+*/
 /**
  * @author archanaa
  * 
  */
-public class ListOfMatchesSteps extends AbstractSteps {
 
+public class ListOfMatchesSteps extends AbstractSteps {
+/*
 	private HomePage homePage;
 
 	@Before
@@ -209,5 +210,5 @@ public class ListOfMatchesSteps extends AbstractSteps {
 		// Express the Regexp above with the code you wish you had
 		throw new PendingException();
 	}
-
+*/
 }

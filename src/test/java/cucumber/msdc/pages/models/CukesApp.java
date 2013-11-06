@@ -30,10 +30,11 @@ public class CukesApp {
 	 * Stores home page object so that this can accessed from all step definition classes
 	 */
 	protected HomePage homePage;
-
+	
 	public CukesApp(Properties configProperties) {
 		this.configProperties = configProperties;
 		this.baseUrl = configProperties.getProperty("baseUrl");
+		
 		System.setProperty("webdriver.chrome.driver", "C:\\Arc\\cukes-match-story-data\\src\\test\\resources\\chromedriver.exe");
         // System.setProperty("webdriver.chrome.driver", configProperties.getProperty("chromeDriverLocation"));
 		this.webDriver = new ChromeDriver();
