@@ -10,7 +10,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
  */
 
 public abstract class ConnectionManager {
-private WebDriver webDriver;
+protected WebDriver webDriver;
 private static final String CHROME_DRIVER_LOCATION="\\src\\test\\resources\\chromedriver\\win32_2.2\\chromedriver.exe";
 
 public void setUp(){

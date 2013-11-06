@@ -14,6 +14,12 @@ public class HomePageElements extends KeyElements{
 
 	private static final String HOMEPAGE_ELEMENT_IDENTIFIER="elementidentifier//homepage.properties";
 		
+	protected HomePageElements(WebDriver webDriver, String url){
+		super(webDriver,HOMEPAGE_ELEMENT_IDENTIFIER);
+		webDriver.get(url);	
+	
+}
+	
 	protected HomePageElements(WebDriver webDriver){
 		super(webDriver,HOMEPAGE_ELEMENT_IDENTIFIER);
 		webDriver.get(elementIdentifier.getString("url"));	
@@ -38,10 +44,10 @@ public class HomePageElements extends KeyElements{
 	}
 	
 	/**
-	 * get gototmatchsummaryicon
+	 * get "goto match summary page icon"
 	 * @param 
 	 */
-	protected WebElement getGoToMatchSummaryIcon(){
+	protected WebElement getGoToMatchSummaryPageIcon(){
 		return null;
 	}
 }
