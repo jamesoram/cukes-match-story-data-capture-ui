@@ -1,6 +1,7 @@
 package cucumber.msdc.stepdefs;
 
-import com.pressassociation.pages.ConnectionManager;
+import cucumber.msdc.pages.ConnectionManager;
+
 
 
 /**
