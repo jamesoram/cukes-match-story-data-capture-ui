@@ -11,7 +11,7 @@
 
 Feature: As a Sports Information Processor, when I am on Match summary page, I should see match actions list ordered by Time
 
-@Shahnaaz
+
 Scenario: Actions displayed in descending order of time
 Given I am on the summary page for a particular match "3667001"
 Then I should see the actions list displayed in descending order of time

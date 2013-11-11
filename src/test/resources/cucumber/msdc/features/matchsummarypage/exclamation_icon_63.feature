@@ -12,7 +12,7 @@
 Feature: 
 As a Sports Information Processor, when I am on a match summary page, I should see an exclamation icon for each action displayed
 
-@Shahnaaz
+
 Scenario: Default exclamation icon
 Given I am on the summary page for a particular match "3667001"
 Then I should see an exclamation icon for each action displayed and greyed out by default
