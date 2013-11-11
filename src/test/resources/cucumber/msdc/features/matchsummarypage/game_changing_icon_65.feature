@@ -12,18 +12,18 @@
 Feature: 
 As a Sports Information Processor, when I am on a match summary page, I should see a circle (game changing event flag) icon for each action displayed
 
-@Shahnaaz
+
 Scenario: Default circle (game changing event flag) icon
 Given I am on the summary page for a particular match "3667001"
 Then I should see a circle (game changing event flag) icon for each action displayed and greyed out by default
 
-@Shahnaaz
+
 Scenario: Circle (game changing event flag) icon when highlighted
 Given I am on the summary page for a particular match "3667001"
 When I select the circle (game changing event flag) icon for a particular action in the match
 Then I should see that the circle (game changing event flag) icon is highlighted in red
 
-@Shahnaaz
+
 Scenario: Circle (game changing event flag) icon already highlighted
 Given I am on the summary page for a particular match "3667001"
 And a circle (game changing event flag) icon for a particular action already selected

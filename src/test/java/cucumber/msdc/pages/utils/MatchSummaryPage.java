@@ -31,15 +31,42 @@ public class MatchSummaryPage extends MatchSummaryPageElements {
 	}
 
 	public Boolean isExclamationIconGreyedOut() {
-		return isIconGreyedOut(getMatchActionExclamationIcons());
+	
+	for (WebElement icon : getMatchActionExclamationIcons()) {
+			
+			String backgroundPosition =	icon.getCssValue("background-position");
+		
+			if ( !backgroundPosition.equals("4px -116px")){
+				return false;
+			}
+		}
+		return true;
 	}
 
 	public Boolean isFavouriteIconGreyedOut() {
-		return isIconGreyedOut(getMatchActionFavouriteIcons());
+	
+for (WebElement icon : getMatchActionFavouriteIcons()) {
+			
+			String backgroundPosition =	icon.getCssValue("background-position");
+		
+			if ( !backgroundPosition.equals("4px -296px")){
+				return false;
+			}
+		}
+		return true;
 	}
 	
 	public Boolean isGameChangingIconGreyedOut() {
-		return isIconGreyedOut(getMatchActionGameChangingIcons());
+	
+		for (WebElement icon : getMatchActionGameChangingIcons()) {
+			
+			String backgroundPosition =	icon.getCssValue("background-position");
+		
+			if ( !backgroundPosition.equals("4px -296px")){
+				return false;
+			}
+		}
+		return true;
 	}
 
 	private Boolean isIconGreyedOut(List<WebElement> Icons) {
@@ -48,7 +75,7 @@ public class MatchSummaryPage extends MatchSummaryPageElements {
 			//String outerColor = icon.getCssValue("outline-color");
 			String backgroundPosition =	icon.getCssValue("background-position");
 		//	if ((!Color.equals("rgba(0, 0, 0, 1)"))	&& (!outerColor.equals("rgba(0, 0, 0, 1)")) ) {
-			if (!backgroundPosition.equals("4px -116px")){
+			if ( !backgroundPosition.equals("4px -296px")){
 				return false;
 			}
 		}
