@@ -22,6 +22,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 public class MatchSummaryPageElements extends KeyElements {
 	
 	private static final String MATCH_SUMMARY_PAGE_ELEMENT_IDENTIFIER="elementidentifier//matchsummarypage.properties";
+	private int actionNo;
 	
 	protected MatchSummaryPageElements(WebDriver webDriver, String url){
 		super(webDriver,MATCH_SUMMARY_PAGE_ELEMENT_IDENTIFIER);
@@ -90,9 +91,35 @@ public class MatchSummaryPageElements extends KeyElements {
 		
 	}
 	
+	protected int getActionNo(){
+		
+		return actionNo;
+	}
 	
+	protected void setActionNo(int actionNo){
+		
+		this.actionNo=actionNo;
+	}
 	
+	protected WebElement getActionForYellowCard(int actionNo){
+		setActionNo(actionNo);
+		try{return  webDriver.findElement(By.xpath("(//div[@class='match-action']/div[@class='action-icon booking'])[position()="+getActionNo()+"]"));
+		}
+		catch(NoSuchElementException e){
+			e.printStackTrace();
+		}
+		return null;
+	}
 	
+	protected WebElement getActionForRedCard(int actionNo){
+		setActionNo(actionNo);
+		try{return  webDriver.findElement(By.xpath("(//div[@class='match-action']/div[@class='action-icon dismissal'])[position()="+getActionNo()+"]"));
+		}
+		catch(NoSuchElementException e){
+			e.printStackTrace();
+		}
+		return null;
+	}
 	
 
 }

@@ -16,7 +16,7 @@ import cucumber.msdc.pages.utils.MatchSummaryPage;
  */
 public class MatchSummaryPageStepDefinitions extends ConnectionManager {
 	private MatchSummaryPage matchSummaryPage;
-	private String nthAction;
+	
 	@Before()
 	public void setUp() {
 		super.setUp();
@@ -217,6 +217,27 @@ public void I_select_the_circle_game_changing_event_flag_icon_for_a_particular_a
 	assertEquals("the color is not grey", "impact",
 			matchSummaryPage.getColorForMatchActionGameChangingIcon(5));
 	matchSummaryPage.clickMatchActionGameChangingICon(5);
+}
+
+@Given("^a player has got a yellow card$")
+public void a_player_has_got_a_yellow_card() throws Throwable {
+   
+    matchSummaryPage.setActionNo(1);
+}
+
+@Then("^I should see a yellow card icon displayed for that particular action$")
+public void I_should_see_a_yellow_card_icon_displayed_for_that_particular_action() throws Throwable {
+    assertTrue("yellow card does not exist", matchSummaryPage.isYellowCardDisplayedForAction(1));
+}
+
+@Given("^a player has got a red card$")
+public void a_player_has_got_a_red_card() throws Throwable {
+	matchSummaryPage.setActionNo(1);
+}
+
+@Then("^I should see a red card icon displayed for that particular action$")
+public void I_should_see_a_red_card_icon_displayed_for_that_particular_action() throws Throwable {
+	  assertTrue("red card does not exist", matchSummaryPage.isRedCardDisplayedForAction(1));
 }
 
 

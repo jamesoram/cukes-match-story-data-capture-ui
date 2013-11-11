@@ -20,6 +20,9 @@ import cucumber.msdc.pages.models.MatchSummaryPageElements;
  */
 public class MatchSummaryPage extends MatchSummaryPageElements {
 
+	
+	
+
 	public MatchSummaryPage(WebDriver webDriver, String url) {
 		super(webDriver, url);
 
@@ -139,6 +142,27 @@ public MatchSummaryPage clickMatchActionGameChangingICon(int i) {
 			
 		}
 
+public int getActionNo(){
+		
+		return super.getActionNo();
+	}
 	
-	
+public void setActionNo(int actionNo){
+		
+		super.setActionNo(actionNo);
+	}
+
+public Boolean isYellowCardDisplayedForAction(int actionNo){
+	if (!(getActionForYellowCard(actionNo)==null)){
+		return true;
+	}
+	return false;
+} 
+
+public Boolean isRedCardDisplayedForAction(int actionNo){
+	if (!(getActionForRedCard(actionNo)==null)){
+		return true;
+	}
+	return false;
+} 
 }

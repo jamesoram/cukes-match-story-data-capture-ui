@@ -12,8 +12,9 @@
 Feature: 
 As a Sports Information Processor When I am on Match summary page, I should see the red card icon for all dismissal actions
 
-Scenario 1: Red card icon
-Given I am on the summary page for a particular match
-And a player has got a red card
+
+Scenario: Red card icon
+Given I am on the summary page for a particular match "3667002"
+And a player has got a red card 
 Then I should see a red card icon displayed for that particular action
 
