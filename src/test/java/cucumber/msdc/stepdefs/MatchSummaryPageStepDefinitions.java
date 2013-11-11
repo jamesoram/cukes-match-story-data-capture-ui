@@ -240,5 +240,43 @@ public void I_should_see_a_red_card_icon_displayed_for_that_particular_action() 
 	  assertTrue("red card does not exist", matchSummaryPage.isRedCardDisplayedForAction(1));
 }
 
+@Given("^a player has scored a goal from penalty action$")
+public void a_player_has_scored_a_goal_from_penalty_action() throws Throwable {
+	matchSummaryPage.setActionNo(1);
+}
 
+@Then("^I should see a football icon for the goal from penalty action$")
+public void I_should_see_a_football_icon_for_the_goal_from_penalty_action() throws Throwable {
+	 assertTrue("red card does not exist", matchSummaryPage.isGoalIconDisplayedForGoalFromPenaltyAction(1));
+}
+
+@Given("^a player has scored a goal action$")
+public void a_player_has_scored_a_goal_action() throws Throwable {
+	matchSummaryPage.setActionNo(1);
+}
+
+@Then("^I should see a football icon for the goal action$")
+public void I_should_see_a_football_icon_for_the_goal_action() throws Throwable {
+	 assertTrue("red card does not exist", matchSummaryPage.isGoalIconDisplayedForGoalAction(1));
+}
+
+
+@Given("^a player has scored a goal from penalty shootout action$")
+public void a_player_has_scored_a_goal_from_penalty_shootout_action() throws Throwable {
+	matchSummaryPage.setActionNo(1);
+}
+
+@Then("^I should see a football icon for the penalty shootout action$")
+public void I_should_see_a_football_icon_for_the_penalty_shootout_action() throws Throwable {
+	 assertTrue("red card does not exist", matchSummaryPage.isGoalIconDisplayedForGoalFromPenaltyShootOutAction(1));
+}
+
+@Given("^a player has scored an own goal$")
+public void a_player_has_scored_an_own_goal() throws Throwable {
+	matchSummaryPage.setActionNo(1);}
+
+@Then("^I should see a football icon for the own goal action$")
+public void I_should_see_a_football_icon_for_the_own_goal_action() throws Throwable {
+	 assertTrue("red card does not exist", matchSummaryPage.isGoalIconDisplayedForOwnGoalAction(1));
+}
 }

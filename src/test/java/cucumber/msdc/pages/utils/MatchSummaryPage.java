@@ -165,4 +165,42 @@ public Boolean isRedCardDisplayedForAction(int actionNo){
 	}
 	return false;
 } 
+
+
+public Boolean isGoalIconDisplayedForGoalFromPenaltyAction(int actionNo) {
+	
+	if (!(getActionForGoalFromPenalty(actionNo)==null)){
+		return true;
+	}
+	return false;
+}
+
+
+
+public Boolean isGoalIconDisplayedForGoalAction(int actionNo) {
+	
+	if (!(getActionForGoal(actionNo)==null)){
+		return true;
+	}
+	return false;
+}
+
+
+
+public Boolean isGoalIconDisplayedForOwnGoalAction(int actionNo) {
+	
+	if (!(getActionForOwnGoal(actionNo)==null)){
+		return true;
+	}
+	return false;
+}
+
+public Boolean isGoalIconDisplayedForGoalFromPenaltyShootOutAction(int actionNo) {
+	
+	if (!(getActionForGoalFromPenaltyShootOut(actionNo)==null)){
+		return true;
+	}
+	return false;
+}
+
 }

@@ -8,6 +8,7 @@ import junit.framework.Assert;
 
 
 
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -120,6 +121,49 @@ public class MatchSummaryPageElements extends KeyElements {
 		}
 		return null;
 	}
+	
+	protected WebElement getActionForGoalFromPenalty(int actionNo){
+		
+				setActionNo(actionNo);
+				try{return  webDriver.findElement(By.xpath("(//div[@class='match-action']/div[@class='action-icon goal-from-penalty'])[position()="+getActionNo()+"]"));
+				}
+				catch(NoSuchElementException e){
+					e.printStackTrace();
+				}
+				return null;
+	}
+	
+	protected WebElement getActionForGoal(int actionNo) {
+		setActionNo(actionNo);
+		try{return  webDriver.findElement(By.xpath("(//div[@class='match-action']/div[@class='action-icon goal'])[position()="+getActionNo()+"]"));
+		}
+		catch(NoSuchElementException e){
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	protected WebElement getActionForOwnGoal(int actionNo) {
+		setActionNo(actionNo);
+		try{return  webDriver.findElement(By.xpath("(//div[@class='match-action']/div[@class='action-icon own-goal'])[position()="+getActionNo()+"]"));
+		}
+		catch(NoSuchElementException e){
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	protected WebElement getActionForGoalFromPenaltyShootOut(int actionNo) {
+		setActionNo(actionNo);
+		try{return  webDriver.findElement(By.xpath("(//div[@class='match-action']/div[@class='action-icon shootoutgoal'])[position()="+getActionNo()+"]"));
+		}
+		catch(NoSuchElementException e){
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	
 	
 
 }

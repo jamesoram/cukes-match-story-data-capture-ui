@@ -12,18 +12,27 @@
 Feature: 
 As a Sports Information Processor, when I am on a match summary page, I should see a football icon for each type of goal action
 
-Scenario 1: Football icon - goal action
-Given I am on the summary page for a particular match
-Then I should see a football icon for all the "goal" actions in a match
+@Shahnaaz
+Scenario: Football icon - goal action
+Given I am on the summary page for a particular match "3643941"
+And a player has scored a goal action
+Then I should see a football icon for the goal action
 
-Scenario 2: Football icon - goal from penalty action
-Given I am on the summary page for a particular match
-Then I should see a football icon for all "goal from penalty" actions in a match
+@Shahnaaz
+Scenario: Football icon - goal from penalty action
 
-Scenario 3: Football icon - penalty shootout action
-Given I am on the summary page for a particular match
-Then I should see a football icon for all "penalty shootout" actions in a match
+Given I am on the summary page for a particular match "3669788"
+And a player has scored a goal from penalty action
+Then I should see a football icon for the goal from penalty action
 
-Scenario 4: Football icon - own goal action
-Given I am on the summary page for a particular match
-Then I should see a football icon for all "own goal" actions in a match
+@Shahnaaz
+Scenario: Football icon - penalty shootout action
+Given I am on the summary page for a particular match "3510294"
+And a player has scored a goal from penalty shootout action
+Then I should see a football icon for the penalty shootout action
+
+@Shahnaaz
+Scenario: Football icon - own goal action
+Given I am on the summary page for a particular match "3631166"
+And a player has scored an own goal
+Then I should see a football icon for the own goal action
