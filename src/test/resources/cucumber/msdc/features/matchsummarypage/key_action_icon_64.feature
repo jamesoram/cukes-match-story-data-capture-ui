@@ -5,25 +5,23 @@
 #Date: 30-10-2013
 #Jira Ticket: MSDC-64
 #============================
-#Reviewer: Not reviewed yet
-#Date of review: NA
-#============================
+
 
 Feature: 
 As a Sports Information Processor, when I am on a match summary page, I should see an favourite icon for each action displayed
 
-
+@Complete
 Scenario: Default favourite icon
 Given I am on the summary page for a particular match "3667001"
 Then I should see an favourite icon for each action displayed and greyed out by default
 
-
+@Complete
 Scenario: Favourite icon when highlighted
 Given I am on the summary page for a particular match "3667001"
 When I select the favourite icon for a particular action in the match
 Then I should see that the favourite icon is highlighted in yellow
 
-
+@Complete
 Scenario: Favourite icon already highlighted
 Given I am on the summary page for a particular match "3667001"
 And an favourite icon for a particular action already selected

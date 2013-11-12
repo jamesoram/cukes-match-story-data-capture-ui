@@ -5,9 +5,7 @@
 #Date: 30-10-2013
 #Jira Ticket: MSDC-61
 #============================
-#Reviewer: Not reviewed yet
-#Date of review: NA
-#============================
+
 
 Feature: As a Sports Information Processor, when I am on Match summary page, I should see match actions list ordered by Time
 

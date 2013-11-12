@@ -1,12 +1,18 @@
 package cucumber.msdc.stepdefs;
 
 import static org.junit.Assert.*;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import cucumber.api.DataTable;
 import cucumber.api.PendingException;
 import cucumber.api.java.After;
 import cucumber.api.java.Before;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
+import cucumber.msdc.TitleBar;
 import cucumber.msdc.pages.ConnectionManager;
 import cucumber.msdc.pages.utils.MatchSummaryPage;
 
@@ -25,7 +31,7 @@ public class MatchSummaryPageStepDefinitions extends ConnectionManager {
 	@After()
 	public void tearDown() {
 
-	 //super.tearDown();
+	super.tearDown();
 	}
 
 	@Given("^I am on the summary page for a particular match \"([^\"]*)\"$")
@@ -75,6 +81,7 @@ public class MatchSummaryPageStepDefinitions extends ConnectionManager {
 		assertEquals("the color is not red", "quality flagged",
 				matchSummaryPage.getColorForMatchActionExclamationIcon(5));
 		matchSummaryPage.clickMatchActionExclamationICon(5);
+		
 	}
 	
 	@Given("^an exclamation icon for a particular action already selected$")
@@ -113,7 +120,7 @@ public class MatchSummaryPageStepDefinitions extends ConnectionManager {
 
 	@When("^I select the favourite icon for a particular action in the match$")
 	public void I_select_the_favourite_icon_for_a_particular_action_in_the_match() throws Throwable {
-		assertEquals("the color is not grey", "4px -116px",
+		assertEquals("the color is not grey", "4px -176px",
 				matchSummaryPage
 						.getBackGroundPositionForMatchActionFavouriteIcon(5));
 		assertEquals("the color is not grey", "key-action",
@@ -124,19 +131,19 @@ public class MatchSummaryPageStepDefinitions extends ConnectionManager {
 	@Then("^I should see that the favourite icon is highlighted in yellow$")
 	public void I_should_see_that_the_favourite_icon_is_highlighted_in_red() throws Throwable {
 		Thread.sleep(1000);
-		assertEquals("the color is not yellow", "-56px -116px",
+		assertEquals("the color is not yellow", "-56px -176px",
 				matchSummaryPage
-						.getBackGroundPositionForMatchActionExclamationIcon(5));
+						.getBackGroundPositionForMatchActionFavouriteIcon(5));
 		assertEquals("the color is not red", "key-action flagged",
-				matchSummaryPage.getColorForMatchActionExclamationIcon(5));
-		matchSummaryPage.clickMatchActionExclamationICon(5);
+				matchSummaryPage.getColorForMatchActionFavouriteIcon(5));
+		matchSummaryPage.clickMatchActionFavouriteICon(5);
 	}
 
 	@Given("^an favourite icon for a particular action already selected$")
 	public void an_favourite_icon_for_a_particular_action_already_selected() throws Throwable {
 		matchSummaryPage.clickMatchActionFavouriteICon(5);
 		Thread.sleep(1000);
-		assertEquals("the color is not yellow", "-56px -116px",
+		assertEquals("the color is not yellow", "-56px -176px",
 				matchSummaryPage
 						.getBackGroundPositionForMatchActionFavouriteIcon(5));
 		assertEquals("the color is not yellow", "key-action flagged",
@@ -152,7 +159,7 @@ public class MatchSummaryPageStepDefinitions extends ConnectionManager {
 	@Then("^I should see that the favourite icon is greyed out$")
 	public void I_should_see_that_the_favourite_icon_is_greyed_out() throws Throwable {
 		Thread.sleep(1000);
-		assertEquals("the color is not grey", "4px -116px",
+		assertEquals("the color is not grey", "4px -176px",
 				matchSummaryPage
 						.getBackGroundPositionForMatchActionFavouriteIcon(5));
 		assertEquals("the color is not grey", "key-action",
@@ -160,14 +167,14 @@ public class MatchSummaryPageStepDefinitions extends ConnectionManager {
 	}
 	
 
-@Then("^I should see a circle \\(game changing event flag\\) icon for each action displayed and greyed out by default$")
+@Then("^I should see a game changing event flag for each action displayed and greyed out by default$")
 public void I_should_see_a_circle_game_changing_event_flag_icon_for_each_action_displayed_and_greyed_out_by_default() throws Throwable {
 	assertTrue(
 			"not all gamechanging icons which needs to be greyed out are greyed out",
 			matchSummaryPage.isGameChangingIconGreyedOut());
 }
 
-@Then("^I should see that the circle \\(game changing event flag\\) icon is highlighted in red$")
+@Then("^I should see that the game changing event flag is highlighted in red$")
 public void I_should_see_that_the_circle_game_changing_event_flag_icon_is_highlighted_in_red() throws Throwable {
 	Thread.sleep(1000);
 	assertEquals("the color is not red", "-56px -296px",
@@ -178,7 +185,7 @@ public void I_should_see_that_the_circle_game_changing_event_flag_icon_is_highli
 	matchSummaryPage.clickMatchActionGameChangingICon(5);
 }
 
-@Given("^a circle \\(game changing event flag\\) icon for a particular action already selected$")
+@Given("^a game changing event flag for a particular action already selected$")
 public void a_circle_game_changing_event_flag_icon_for_a_particular_action_already_selected() throws Throwable {
 	matchSummaryPage.clickMatchActionGameChangingICon(5);
 	Thread.sleep(1000);
@@ -190,14 +197,14 @@ public void a_circle_game_changing_event_flag_icon_for_a_particular_action_alrea
 
 }
 
-@When("^I select the circle \\(game changing event flag\\) icon again$")
+@When("^I select the game changing event flag again$")
 public void I_select_the_circle_game_changing_event_flag_icon_again() throws Throwable {
 	Thread.sleep(1000);
 	matchSummaryPage.clickMatchActionGameChangingICon(5);
 
 }
 
-@Then("^I should see that the circle \\(game changing event flag\\) icon greyed out$")
+@Then("^I should see that the game changing event flag greyed out$")
 public void I_should_see_that_the_circle_game_changing_event_flag_icon_greyed_out() throws Throwable {
 	Thread.sleep(1000);
 	assertEquals("the color is not grey", "4px -296px",
@@ -208,7 +215,7 @@ public void I_should_see_that_the_circle_game_changing_event_flag_icon_greyed_ou
 }
 
 
-@When("^I select the circle \\(game changing event flag\\) icon for a particular action in the match$")
+@When("^I select the game changing event flag for a particular action in the match$")
 public void I_select_the_circle_game_changing_event_flag_icon_for_a_particular_action_in_the_match() throws Throwable {
 	
 	assertEquals("the color is not grey", "4px -296px",
@@ -278,5 +285,16 @@ public void a_player_has_scored_an_own_goal() throws Throwable {
 @Then("^I should see a football icon for the own goal action$")
 public void I_should_see_a_football_icon_for_the_own_goal_action() throws Throwable {
 	 assertTrue("red card does not exist", matchSummaryPage.isGoalIconDisplayedForOwnGoalAction(1));
+}
+
+@Then("^I should see the following details in the title bar:$")
+public void I_should_see_the_following_details_in_the_title_bar(DataTable expectedTitleBar) throws Throwable {
+    
+	List<TitleBar> actualTitleBar= new ArrayList();
+    actualTitleBar.add(new TitleBar(matchSummaryPage.getHomeTeamName(), matchSummaryPage.getAwayTeamName(),matchSummaryPage.getScore(), matchSummaryPage.getSrcForHomeTeam(),matchSummaryPage.getHeightForHomeTeam(), matchSummaryPage.getWidthForHomeTeam(), matchSummaryPage.getSrcForAwayTeam(), matchSummaryPage.getHeightForAwayTeam(),matchSummaryPage.getWidthForAwayTeam()));
+
+    expectedTitleBar.diff(actualTitleBar);
+    
+
 }
 }
