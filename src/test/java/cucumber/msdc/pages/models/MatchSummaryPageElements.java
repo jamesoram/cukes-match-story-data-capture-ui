@@ -9,6 +9,8 @@ import junit.framework.Assert;
 
 
 
+
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -163,7 +165,26 @@ public class MatchSummaryPageElements extends KeyElements {
 		return null;
 	}
 	
+	protected WebElement getHomeTeam(){
+		return webDriver.findElement(By.xpath("//div[@class='header']/div[@class='teams']/div[@class='home-team ng-binding']"));
+		
+	}
 	
+	protected WebElement getAwayTeam(){
+		return webDriver.findElement(By.xpath("//div[@class='header']/div[@class='teams']/div[@class='away-team ng-binding']"));
+		
+	}
 	
+	protected WebElement getScoreElement(){
+		return webDriver.findElement(By.xpath("//div[@class='header']/div[@class='teams']/div[@class='score ng-binding']"));
+		
+	}
+	
+	protected WebElement getHomeTeamImage(){
+		return webDriver.findElement(By.xpath("//div[@class='header']/div[@class='home-badge']/img[@class='club-badge']"));
+	}
 
+	protected WebElement getAwayTeamImage(){
+		return webDriver.findElement(By.xpath("//div[@class='header']/div[@class='away-badge']/img[@class='club-badge']"));
+	}
 }

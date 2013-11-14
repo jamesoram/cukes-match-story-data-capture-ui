@@ -12,6 +12,11 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+
+
+
+
+
 import cucumber.msdc.pages.models.MatchSummaryPageElements;
 
 /**
@@ -20,7 +25,6 @@ import cucumber.msdc.pages.models.MatchSummaryPageElements;
  */
 public class MatchSummaryPage extends MatchSummaryPageElements {
 
-	
 	
 
 	public MatchSummaryPage(WebDriver webDriver, String url) {
@@ -52,7 +56,7 @@ for (WebElement icon : getMatchActionFavouriteIcons()) {
 			
 			String backgroundPosition =	icon.getCssValue("background-position");
 		
-			if ( !backgroundPosition.equals("4px -296px")){
+			if ( !backgroundPosition.equals("4px -176px")){
 				return false;
 			}
 		}
@@ -108,7 +112,7 @@ for (WebElement icon : getMatchActionFavouriteIcons()) {
 	
 public MatchSummaryPage clickMatchActionFavouriteICon(int i) {
 		
-		new Actions(webDriver).moveToElement(getAMatchActionExclamationICon(i)).click().perform();
+		new Actions(webDriver).moveToElement(getAMatchActionFavouriteICon(i)).click().perform();
 		return this;
 	}
 	
@@ -119,7 +123,7 @@ public MatchSummaryPage clickMatchActionFavouriteICon(int i) {
 	}
 	public String getBackGroundPositionForMatchActionFavouriteIcon(int i){
 		
-		return getAMatchActionExclamationICon(i).getCssValue("background-position");
+		return getAMatchActionFavouriteICon(i).getCssValue("background-position");
 		
 			
 		}
@@ -201,6 +205,45 @@ public Boolean isGoalIconDisplayedForGoalFromPenaltyShootOutAction(int actionNo)
 		return true;
 	}
 	return false;
+}
+
+public String getHomeTeamName(){
+	return getHomeTeam().getText();
+	
+}
+
+public String getAwayTeamName(){
+	return getAwayTeam().getText();
+	
+}
+
+public String getScore(){
+	return getScoreElement().getText();
+	
+}
+
+public String getSrcForHomeTeam(){
+	return getHomeTeamImage().getAttribute("src");
+}
+
+public String getHeightForHomeTeam(){
+	return getHomeTeamImage().getAttribute("height");
+}
+
+public String getWidthForHomeTeam(){
+	return getHomeTeamImage().getAttribute("width");
+}
+
+public String getSrcForAwayTeam(){
+	return getAwayTeamImage().getAttribute("src");
+}
+
+public String getHeightForAwayTeam(){
+	return getAwayTeamImage().getAttribute("height");
+}
+
+public String getWidthForAwayTeam(){
+	return getAwayTeamImage().getAttribute("width");
 }
 
 }
