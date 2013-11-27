@@ -1,45 +1,45 @@
 package cucumber.msdc.stepdefs;
-/*
+
+import com.pressassociation.test.BaseWebDriverTest;
+import cucumber.api.DataTable;
+import cucumber.api.PendingException;
+import cucumber.api.java.After;
+import cucumber.api.java.Before;
+import cucumber.api.java.en.Given;
+import cucumber.api.java.en.Then;
+import cucumber.api.java.en.When;
 import gherkin.formatter.model.DataTableRow;
 
 import java.util.Set;
 
 import org.junit.Assert;
 
-import cucumber.annotation.After;
-import cucumber.annotation.Before;
-import cucumber.annotation.en.Given;
-import cucumber.annotation.en.Then;
-import cucumber.annotation.en.When;
 import cucumber.msdc.pages.models.HomePage;
 import cucumber.msdc.pages.models.HomePage.Fixture;
-import cucumber.runtime.PendingException;
-import cucumber.table.DataTable;
-*/
+
 /**
  * @author archanaa
  * 
  */
 
-public class ListOfMatchesSteps extends AbstractSteps {
-/*
+public class ListOfMatchesSteps extends BaseWebDriverTest {
+
 	private HomePage homePage;
 
-	@Before
-	public void setUp() {
-		intSetUp();
-		cukesApp.sleep(1000);
+    @Before
+    public void before() {
+        setUp();
+        driver.get("http://msdc.devb.pacpservices.net/");
+    }
 
-	}
-
-	@After
-	public void tearDown() {
-		intTearDown();
-	}
+    @After
+    public void after() {
+        tearDown();
+    }
 
 	@Given("^I am on the home page$")
 	public void I_am_on_the_home_page() throws Throwable {
-		homePage = cukesApp.gotoHomePage();
+		homePage = new HomePage(driver);
 	}
 
 	@When("^I select competition \"([^\"]*)\" and match date \"([^\"]*)\"$")
@@ -210,5 +210,4 @@ public class ListOfMatchesSteps extends AbstractSteps {
 		// Express the Regexp above with the code you wish you had
 		throw new PendingException();
 	}
-*/
 }

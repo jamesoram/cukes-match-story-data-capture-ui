@@ -25,8 +25,6 @@ import cucumber.msdc.pages.models.MatchSummaryPageElements;
  */
 public class MatchSummaryPage extends MatchSummaryPageElements {
 
-	
-
 	public MatchSummaryPage(WebDriver webDriver, String url) {
 		super(webDriver, url);
 
@@ -94,7 +92,7 @@ for (WebElement icon : getMatchActionFavouriteIcons()) {
 	
 	public MatchSummaryPage clickMatchActionExclamationICon(int i) {
 		
-		new Actions(webDriver).moveToElement(getAMatchActionExclamationICon(i)).click().perform();
+		new Actions(driver).moveToElement(getAMatchActionExclamationICon(i)).click().perform();
 		return this;
 	}
 	
@@ -112,7 +110,7 @@ for (WebElement icon : getMatchActionFavouriteIcons()) {
 	
 public MatchSummaryPage clickMatchActionFavouriteICon(int i) {
 		
-		new Actions(webDriver).moveToElement(getAMatchActionFavouriteICon(i)).click().perform();
+		new Actions(driver).moveToElement(getAMatchActionFavouriteICon(i)).click().perform();
 		return this;
 	}
 	
@@ -130,7 +128,7 @@ public MatchSummaryPage clickMatchActionFavouriteICon(int i) {
 	
 public MatchSummaryPage clickMatchActionGameChangingICon(int i) {
 		
-		new Actions(webDriver).moveToElement(getAMatchActionGameChangingICon(i)).click().perform();
+		new Actions(driver).moveToElement(getAMatchActionGameChangingICon(i)).click().perform();
 		return this;
 	}
 	

@@ -4,18 +4,9 @@ import java.util.List;
 import java.util.NoSuchElementException;
 
 import junit.framework.Assert;
-
-
-
-
-
-
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.WebDriverWait;
-
 
 
 /**
@@ -27,41 +18,36 @@ public class MatchSummaryPageElements extends KeyElements {
 	private static final String MATCH_SUMMARY_PAGE_ELEMENT_IDENTIFIER="elementidentifier//matchsummarypage.properties";
 	private int actionNo;
 	
-	protected MatchSummaryPageElements(WebDriver webDriver, String url){
-		super(webDriver,MATCH_SUMMARY_PAGE_ELEMENT_IDENTIFIER);
-		webDriver.get(url);	
-		
-		WebDriverWait wait = new WebDriverWait(webDriver, 10);
-		try{
-			webDriver.findElements(By.xpath(elementIdentifier.getString("matchaction")));
-			
-		}catch(NoSuchElementException e){
+	protected MatchSummaryPageElements(WebDriver driver, String url){
+		super(driver,MATCH_SUMMARY_PAGE_ELEMENT_IDENTIFIER);
+		driver.get(url);	
+
+		try {
+			driver.findElements(By.xpath(elementIdentifier.getString("matchaction")));
+		} catch(NoSuchElementException e){
 			Assert.fail("the element is not loaded");
 			
 		}
+    }
 	
-}
-	
-	protected MatchSummaryPageElements(WebDriver webDriver){
-		super(webDriver,MATCH_SUMMARY_PAGE_ELEMENT_IDENTIFIER);
-		
-	
-}
+	protected MatchSummaryPageElements(WebDriver driver){
+		super(driver,MATCH_SUMMARY_PAGE_ELEMENT_IDENTIFIER);
+    }
 	
 	private List<WebElement> getMatchActions(){
-	return	webDriver.findElements(By.xpath(elementIdentifier.getString("matchaction")));
+	return	driver.findElements(By.xpath(elementIdentifier.getString("matchaction")));
 	}
 	
 	protected List<WebElement> getMatchActionExclamationIcons(){
-		return webDriver.findElements(By.xpath(elementIdentifier.getString("exclamationicon")));
+		return driver.findElements(By.xpath(elementIdentifier.getString("exclamationicon")));
 	}
 	
 	protected List<WebElement> getMatchActionFavouriteIcons(){
-		return webDriver.findElements(By.xpath(elementIdentifier.getString("favouriteicon")));
+		return driver.findElements(By.xpath(elementIdentifier.getString("favouriteicon")));
 	}
 	
 	protected List<WebElement> getMatchActionGameChangingIcons(){
-		return webDriver.findElements(By.xpath(elementIdentifier.getString("gamechangingicon")));
+		return driver.findElements(By.xpath(elementIdentifier.getString("gamechangingicon")));
 	}
 	
 	protected WebElement getAMatchActionExclamationICon(int i){
@@ -69,7 +55,7 @@ public class MatchSummaryPageElements extends KeyElements {
 			throw new IllegalArgumentException();
 		}
 		
-	return	webDriver.findElement(By.xpath("(//div[@class='match-action'])["+i+"]/div[@class='single-action-flags']/input[1]"));
+	return	driver.findElement(By.xpath("(//div[@class='match-action'])["+i+"]/div[@class='single-action-flags']/input[1]"));
 
 		
 	}
@@ -79,7 +65,7 @@ public class MatchSummaryPageElements extends KeyElements {
 			throw new IllegalArgumentException();
 		}
 		
-	return	webDriver.findElement(By.xpath("(//div[@class='match-action'])["+i+"]/div[@class='single-action-flags']/input[2]"));
+	return	driver.findElement(By.xpath("(//div[@class='match-action'])["+i+"]/div[@class='single-action-flags']/input[2]"));
 
 		
 	}
@@ -89,7 +75,7 @@ public class MatchSummaryPageElements extends KeyElements {
 			throw new IllegalArgumentException();
 		}
 		
-	return	webDriver.findElement(By.xpath("(//div[@class='match-action'])["+i+"]/div[@class='single-action-flags']/input[3]"));
+	return	driver.findElement(By.xpath("(//div[@class='match-action'])["+i+"]/div[@class='single-action-flags']/input[3]"));
 
 		
 	}
@@ -106,7 +92,7 @@ public class MatchSummaryPageElements extends KeyElements {
 	
 	protected WebElement getActionForYellowCard(int actionNo){
 		setActionNo(actionNo);
-		try{return  webDriver.findElement(By.xpath("(//div[@class='match-action']/div[@class='action-icon booking'])[position()="+getActionNo()+"]"));
+		try{return  driver.findElement(By.xpath("(//div[@class='match-action']/div[@class='action-icon booking'])[position()="+getActionNo()+"]"));
 		}
 		catch(NoSuchElementException e){
 			e.printStackTrace();
@@ -116,7 +102,7 @@ public class MatchSummaryPageElements extends KeyElements {
 	
 	protected WebElement getActionForRedCard(int actionNo){
 		setActionNo(actionNo);
-		try{return  webDriver.findElement(By.xpath("(//div[@class='match-action']/div[@class='action-icon dismissal'])[position()="+getActionNo()+"]"));
+		try{return  driver.findElement(By.xpath("(//div[@class='match-action']/div[@class='action-icon dismissal'])[position()="+getActionNo()+"]"));
 		}
 		catch(NoSuchElementException e){
 			e.printStackTrace();
@@ -127,7 +113,7 @@ public class MatchSummaryPageElements extends KeyElements {
 	protected WebElement getActionForGoalFromPenalty(int actionNo){
 		
 				setActionNo(actionNo);
-				try{return  webDriver.findElement(By.xpath("(//div[@class='match-action']/div[@class='action-icon goal-from-penalty'])[position()="+getActionNo()+"]"));
+				try{return  driver.findElement(By.xpath("(//div[@class='match-action']/div[@class='action-icon goal-from-penalty'])[position()="+getActionNo()+"]"));
 				}
 				catch(NoSuchElementException e){
 					e.printStackTrace();
@@ -137,7 +123,7 @@ public class MatchSummaryPageElements extends KeyElements {
 	
 	protected WebElement getActionForGoal(int actionNo) {
 		setActionNo(actionNo);
-		try{return  webDriver.findElement(By.xpath("(//div[@class='match-action']/div[@class='action-icon goal'])[position()="+getActionNo()+"]"));
+		try{return  driver.findElement(By.xpath("(//div[@class='match-action']/div[@class='action-icon goal'])[position()="+getActionNo()+"]"));
 		}
 		catch(NoSuchElementException e){
 			e.printStackTrace();
@@ -147,7 +133,7 @@ public class MatchSummaryPageElements extends KeyElements {
 	
 	protected WebElement getActionForOwnGoal(int actionNo) {
 		setActionNo(actionNo);
-		try{return  webDriver.findElement(By.xpath("(//div[@class='match-action']/div[@class='action-icon own-goal'])[position()="+getActionNo()+"]"));
+		try{return  driver.findElement(By.xpath("(//div[@class='match-action']/div[@class='action-icon own-goal'])[position()="+getActionNo()+"]"));
 		}
 		catch(NoSuchElementException e){
 			e.printStackTrace();
@@ -157,7 +143,7 @@ public class MatchSummaryPageElements extends KeyElements {
 	
 	protected WebElement getActionForGoalFromPenaltyShootOut(int actionNo) {
 		setActionNo(actionNo);
-		try{return  webDriver.findElement(By.xpath("(//div[@class='match-action']/div[@class='action-icon shootoutgoal'])[position()="+getActionNo()+"]"));
+		try{return  driver.findElement(By.xpath("(//div[@class='match-action']/div[@class='action-icon shootoutgoal'])[position()="+getActionNo()+"]"));
 		}
 		catch(NoSuchElementException e){
 			e.printStackTrace();
@@ -166,25 +152,25 @@ public class MatchSummaryPageElements extends KeyElements {
 	}
 	
 	protected WebElement getHomeTeam(){
-		return webDriver.findElement(By.xpath("//div[@class='header']/div[@class='teams']/div[@class='home-team ng-binding']"));
+		return driver.findElement(By.xpath("//div[@class='header']/div[@class='teams']/div[@class='home-team ng-binding']"));
 		
 	}
 	
 	protected WebElement getAwayTeam(){
-		return webDriver.findElement(By.xpath("//div[@class='header']/div[@class='teams']/div[@class='away-team ng-binding']"));
+		return driver.findElement(By.xpath("//div[@class='header']/div[@class='teams']/div[@class='away-team ng-binding']"));
 		
 	}
 	
 	protected WebElement getScoreElement(){
-		return webDriver.findElement(By.xpath("//div[@class='header']/div[@class='teams']/div[@class='score ng-binding']"));
+		return driver.findElement(By.xpath("//div[@class='header']/div[@class='teams']/div[@class='score ng-binding']"));
 		
 	}
 	
 	protected WebElement getHomeTeamImage(){
-		return webDriver.findElement(By.xpath("//div[@class='header']/div[@class='home-badge']/img[@class='club-badge']"));
+		return driver.findElement(By.xpath("//div[@class='header']/div[@class='home-badge']/img[@class='club-badge']"));
 	}
 
 	protected WebElement getAwayTeamImage(){
-		return webDriver.findElement(By.xpath("//div[@class='header']/div[@class='away-badge']/img[@class='club-badge']"));
+		return driver.findElement(By.xpath("//div[@class='header']/div[@class='away-badge']/img[@class='club-badge']"));
 	}
 }

@@ -1,9 +1,9 @@
 package cucumber.msdc;
 
-
+import cucumber.api.CucumberOptions;
+import cucumber.api.junit.Cucumber;
 import org.junit.runner.RunWith;
 
-import cucumber.api.junit.Cucumber;
 
 
 
@@ -13,12 +13,11 @@ import cucumber.api.junit.Cucumber;
  */
 
 @RunWith(Cucumber.class)
-@Cucumber.Options(
-		format = {"html:target/cucumber-html-report/features/matchsummarypage" },
-		//glue="classpath:com/pressassociation/stepassociations/media",
-		features="classpath:cucumber/msdc/features/matchsummarypage"
-		,tags = {"@Complete"}
-		)
+@CucumberOptions(
+  format = {"html:target/cucumber-html-report/features/matchsummarypage"},
+  features = "src/test/resources/cucumber/msdc/features/matchsummarypage/exclamation_icon_63.feature",
+  tags = {"@Complete"}
+)
 public class TestRunner {
 
 }
