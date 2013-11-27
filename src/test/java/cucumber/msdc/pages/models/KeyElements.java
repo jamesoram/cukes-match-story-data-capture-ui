@@ -9,11 +9,12 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 /**
-@author Shahnaaz Rahamatullah
-@version 1.0
+ * @author Shahnaaz Rahamatullah
+ * @version 1.0
  */
 public abstract class KeyElements extends AbstractPage {
-	protected Configuration elementIdentifier;
+
+    protected Configuration elementIdentifier;
 
 	protected KeyElements(WebDriver webDriver,String elementIdentifierLocation) {
         super(webDriver);
@@ -23,8 +24,9 @@ public abstract class KeyElements extends AbstractPage {
 			e.printStackTrace();
 		}
 	}
-	
+
 	protected void takeScreenShot(RuntimeException e, String fileName) {
+
 //        File screenShot = ((TakesScreenshot) webDriver).getScreenshotAs(OutputType.FILE);
 //        try {
 //            FileUtils.copyFile(screenShot, new File(fileName + ".png"));
