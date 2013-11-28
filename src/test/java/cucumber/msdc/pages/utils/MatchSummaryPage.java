@@ -2,7 +2,6 @@ package cucumber.msdc.pages.utils;
 
 import java.text.ParseException;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 import org.joda.time.Duration;
@@ -23,64 +22,27 @@ public class MatchSummaryPage extends MatchSummaryPageElements {
 
 	public MatchSummaryPage(WebDriver webDriver, String url) {
 		super(webDriver, url);
-
 	}
 
 	public Boolean isExclamationIconGreyedOut() {
-
-		for (WebElement icon : getMatchActionExclamationIcons()) {
-
-			String backgroundPosition = icon.getCssValue("background-position");
-
-			if (!backgroundPosition.equals("4px -116px")) {
-				return false;
-			}
-		}
-		return true;
+        return doAllBackgroundsEqualCss(getMatchActionExclamationIcons(), "4px -116px");
 	}
 
 	public Boolean isFavouriteIconGreyedOut() {
-
-		for (WebElement icon : getMatchActionFavouriteIcons()) {
-
-			String backgroundPosition = icon.getCssValue("background-position");
-
-			if (!backgroundPosition.equals("4px -176px")) {
-				return false;
-			}
-		}
-		return true;
+        return doAllBackgroundsEqualCss(getMatchActionFavouriteIcons(), "4px -176px");
 	}
 
 	public Boolean isGameChangingIconGreyedOut() {
-
-		for (WebElement icon : getMatchActionGameChangingIcons()) {
-
-			String backgroundPosition = icon.getCssValue("background-position");
-
-			if (!backgroundPosition.equals("4px -296px")) {
-				return false;
-			}
-		}
-		return true;
+        return doAllBackgroundsEqualCss(getMatchActionGameChangingIcons(), "4px -296px");
 	}
 
-	private Boolean isIconGreyedOut(List<WebElement> Icons) {
-		for (WebElement icon : Icons) {
-
-			String backgroundPosition = icon.getCssValue("background-position");
-
-			if (!backgroundPosition.equals("4px -296px")) {
-				return false;
-			}
-		}
-		return true;
-
+	private Boolean isIconGreyedOut(List<WebElement> icons) {
+        return doAllBackgroundsEqualCss(icons, "4px -296px");
 	}
 
-    private boolean doAllElementsEqualCss(List<WebElement> elements, String css, String expectedValue) {
+    private boolean doAllBackgroundsEqualCss(List<WebElement> elements, String expectedValue) {
        for (WebElement element : elements) {
-           String cssValue = element.getCssValue(css);
+           String cssValue = element.getCssValue("background-position");
            if (!cssValue.equals(expectedValue)) {
                return false;
            }
@@ -142,61 +104,29 @@ public class MatchSummaryPage extends MatchSummaryPageElements {
 
 	}
 
-	public int getActionNo() {
-
-		return super.getActionNo();
-	}
-
-	public void setActionNo(int actionNo) {
-
-		super.setActionNo(actionNo);
-	}
-
 	public Boolean isYellowCardDisplayedForAction(int actionNo) {
-		if (!(getActionForYellowCard(actionNo) == null)) {
-			return true;
-		}
-		return false;
+		return !(getActionForYellowCard(actionNo) == null);
 	}
 
 	public Boolean isRedCardDisplayedForAction(int actionNo) {
-		if (!(getActionForRedCard(actionNo) == null)) {
-			return true;
-		}
-		return false;
+		return !(getActionForRedCard(actionNo) == null);
 	}
 
 	public Boolean isGoalIconDisplayedForGoalFromPenaltyAction(int actionNo) {
-
-		if (!(getActionForGoalFromPenalty(actionNo) == null)) {
-			return true;
-		}
-		return false;
+        return !(getActionForGoalFromPenalty(actionNo) == null);
 	}
 
 	public Boolean isGoalIconDisplayedForGoalAction(int actionNo) {
-
-		if (!(getActionForGoal(actionNo) == null)) {
-			return true;
-		}
-		return false;
+        return !(getActionForGoal(actionNo) == null);
 	}
 
 	public Boolean isGoalIconDisplayedForOwnGoalAction(int actionNo) {
-
-		if (!(getActionForOwnGoal(actionNo) == null)) {
-			return true;
-		}
-		return false;
+        return !(getActionForOwnGoal(actionNo) == null);
 	}
 
 	public Boolean isGoalIconDisplayedForGoalFromPenaltyShootOutAction(
 			int actionNo) {
-
-		if (!(getActionForGoalFromPenaltyShootOut(actionNo) == null)) {
-			return true;
-		}
-		return false;
+        return !(getActionForGoalFromPenaltyShootOut(actionNo) == null);
 	}
 
 	public String getHomeTeamName() {
@@ -243,7 +173,7 @@ public class MatchSummaryPage extends MatchSummaryPageElements {
 		int index = 0;
 		for (WebElement duration : getDurationElementForEachAction()) {
 			durations.add(index, duration.getText());
-			index = index + 1;
+			index++;
 		}
 		return durations;
 
@@ -251,7 +181,6 @@ public class MatchSummaryPage extends MatchSummaryPageElements {
 
 	public Boolean areActionsDisplayedInDecendingOrderOfTimeDuration()
 			throws ParseException {
-
 		PeriodFormatter formatter = new PeriodFormatterBuilder()
 				.appendMinutes().appendSeparator(":").appendSeconds()
 				.toFormatter();
