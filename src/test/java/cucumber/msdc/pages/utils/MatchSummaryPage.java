@@ -22,109 +22,70 @@ public class MatchSummaryPage extends MatchSummaryPageElements {
 
 	public MatchSummaryPage(WebDriver webDriver, String url) {
 		super(webDriver, url);
-
-	}
-
-	public MatchSummaryPage(WebDriver webDriver) {
-		super(webDriver);
-
 	}
 
 	public Boolean isExclamationIconGreyedOut() {
-
-		for (WebElement icon : getMatchActionExclamationIcons()) {
-
-			String backgroundPosition = icon.getCssValue("background-position");
-
-			if (!backgroundPosition.equals("4px -116px")) {
-				return false;
-			}
-		}
-		return true;
+        return doAllBackgroundsEqualCss(getMatchActionExclamationIcons(), "4px -116px");
 	}
 
 	public Boolean isFavouriteIconGreyedOut() {
-
-		for (WebElement icon : getMatchActionFavouriteIcons()) {
-
-			String backgroundPosition = icon.getCssValue("background-position");
-
-			if (!backgroundPosition.equals("4px -176px")) {
-				return false;
-			}
-		}
-		return true;
+        return doAllBackgroundsEqualCss(getMatchActionFavouriteIcons(), "4px -176px");
 	}
 
 	public Boolean isGameChangingIconGreyedOut() {
-
-		for (WebElement icon : getMatchActionGameChangingIcons()) {
-
-			String backgroundPosition = icon.getCssValue("background-position");
-
-			if (!backgroundPosition.equals("4px -296px")) {
-				return false;
-			}
-		}
-		return true;
+        return doAllBackgroundsEqualCss(getMatchActionGameChangingIcons(), "4px -296px");
 	}
 
-	private Boolean isIconGreyedOut(List<WebElement> Icons) {
-		for (WebElement icon : Icons) {
-
-			String backgroundPosition = icon.getCssValue("background-position");
-
-			if (!backgroundPosition.equals("4px -296px")) {
-				return false;
-			}
-		}
-		return true;
-
+	private Boolean isIconGreyedOut(List<WebElement> icons) {
+        return doAllBackgroundsEqualCss(icons, "4px -296px");
 	}
+
+    private boolean doAllBackgroundsEqualCss(List<WebElement> elements, String expectedValue) {
+       for (WebElement element : elements) {
+           String cssValue = element.getCssValue("background-position");
+           if (!cssValue.equals(expectedValue)) {
+               return false;
+           }
+       }
+       return true;
+    }
 
 	public MatchSummaryPage clickMatchActionExclamationICon(int i) {
-
-		new Actions(webDriver).moveToElement(getAMatchActionExclamationICon(i))
+		new Actions(driver).moveToElement(getAMatchActionExclamationICon(i))
 				.click().perform();
 		return this;
 	}
 
 	public String getColorForMatchActionExclamationIcon(int i) {
-
 		return getAMatchActionExclamationICon(i).getAttribute("class");
 
 	}
 
 	public String getBackGroundPositionForMatchActionExclamationIcon(int i) {
-
 		return getAMatchActionExclamationICon(i).getCssValue(
 				"background-position");
 
 	}
 
 	public MatchSummaryPage clickMatchActionFavouriteICon(int i) {
-
-		new Actions(webDriver).moveToElement(getAMatchActionFavouriteICon(i))
+		new Actions(driver).moveToElement(getAMatchActionFavouriteICon(i))
 				.click().perform();
 		return this;
 	}
 
 	public String getColorForMatchActionFavouriteIcon(int i) {
-
 		return getAMatchActionExclamationICon(i).getAttribute("class");
 
 	}
 
 	public String getBackGroundPositionForMatchActionFavouriteIcon(int i) {
-
 		return getAMatchActionFavouriteICon(i).getCssValue(
 				"background-position");
 
 	}
 
 	public MatchSummaryPage clickMatchActionGameChangingICon(int i) {
-
-		new Actions(webDriver)
+		new Actions(driver)
 				.moveToElement(getAMatchActionGameChangingICon(i)).click()
 				.perform();
 		return this;
@@ -143,61 +104,29 @@ public class MatchSummaryPage extends MatchSummaryPageElements {
 
 	}
 
-	public int getActionNo() {
-
-		return super.getActionNo();
-	}
-
-	public void setActionNo(int actionNo) {
-
-		super.setActionNo(actionNo);
-	}
-
 	public Boolean isYellowCardDisplayedForAction(int actionNo) {
-		if (!(getActionForYellowCard(actionNo) == null)) {
-			return true;
-		}
-		return false;
+		return !(getActionForYellowCard(actionNo) == null);
 	}
 
 	public Boolean isRedCardDisplayedForAction(int actionNo) {
-		if (!(getActionForRedCard(actionNo) == null)) {
-			return true;
-		}
-		return false;
+		return !(getActionForRedCard(actionNo) == null);
 	}
 
 	public Boolean isGoalIconDisplayedForGoalFromPenaltyAction(int actionNo) {
-
-		if (!(getActionForGoalFromPenalty(actionNo) == null)) {
-			return true;
-		}
-		return false;
+        return !(getActionForGoalFromPenalty(actionNo) == null);
 	}
 
 	public Boolean isGoalIconDisplayedForGoalAction(int actionNo) {
-
-		if (!(getActionForGoal(actionNo) == null)) {
-			return true;
-		}
-		return false;
+        return !(getActionForGoal(actionNo) == null);
 	}
 
 	public Boolean isGoalIconDisplayedForOwnGoalAction(int actionNo) {
-
-		if (!(getActionForOwnGoal(actionNo) == null)) {
-			return true;
-		}
-		return false;
+        return !(getActionForOwnGoal(actionNo) == null);
 	}
 
 	public Boolean isGoalIconDisplayedForGoalFromPenaltyShootOutAction(
 			int actionNo) {
-
-		if (!(getActionForGoalFromPenaltyShootOut(actionNo) == null)) {
-			return true;
-		}
-		return false;
+        return !(getActionForGoalFromPenaltyShootOut(actionNo) == null);
 	}
 
 	public String getHomeTeamName() {
@@ -244,7 +173,7 @@ public class MatchSummaryPage extends MatchSummaryPageElements {
 		int index = 0;
 		for (WebElement duration : getDurationElementForEachAction()) {
 			durations.add(index, duration.getText());
-			index = index + 1;
+			index++;
 		}
 		return durations;
 
@@ -252,7 +181,6 @@ public class MatchSummaryPage extends MatchSummaryPageElements {
 
 	public Boolean areActionsDisplayedInDecendingOrderOfTimeDuration()
 			throws ParseException {
-
 		PeriodFormatter formatter = new PeriodFormatterBuilder()
 				.appendMinutes().appendSeparator(":").appendSeconds()
 				.toFormatter();

@@ -8,7 +8,7 @@
 #Date:
 #=========================================================================================
 
-JIRA Ticket:MSDC-59 
+#JIRA Ticket:MSDC-59
 #=========================================================================================
 Feature: As a Sports Information Processor When I am on the Match summary page, I should see the title bar with teams/score/badges's of the chosen match
 

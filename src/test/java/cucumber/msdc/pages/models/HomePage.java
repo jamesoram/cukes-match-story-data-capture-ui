@@ -5,7 +5,9 @@ import java.util.List;
 import java.util.Set;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.Select;
 
 /**
@@ -14,13 +16,17 @@ import org.openqa.selenium.support.ui.Select;
  */
 public class HomePage extends AbstractViewPage {
 
-	
-	public static final String XPATH_DIV_WITH_CLASS="//div[@class=\"%s\"]";
-	
-	public static final String XPATH_SPAN_WITH_CLASS="//span[@class=\"%s\"]";
+    @FindBy(id = "competition-list")
+    private WebElement competitionList;
 
-	public HomePage(CukesApp cukesApp) {
-		super(cukesApp);
+    @FindBy(id = "match-date")
+    private WebElement matchDate;
+
+	private static final String XPATH_DIV_WITH_CLASS="//div[@class=\"%s\"]";
+	private static final String XPATH_SPAN_WITH_CLASS="//span[@class=\"%s\"]";
+
+	public HomePage(WebDriver driver) {
+		super(driver);
 	}
 	
 	public static class Fixture {
@@ -54,79 +60,20 @@ public class HomePage extends AbstractViewPage {
 		}
 
 		@Override
-		public int hashCode() {
-			final int prime = 31;
-			int result = 1;
-			result = prime * result + ((away == null) ? 0 : away.hashCode());
-			result = prime * result + ((home == null) ? 0 : home.hashCode());
-			result = prime * result + ((score == null) ? 0 : score.hashCode());
-			result = prime * result + ((time == null) ? 0 : time.hashCode());
-			return result;
-		}
-
-		@Override
-		public boolean equals(Object obj) {
-			if (this == obj)
-				return true;
-			if (obj == null)
-				return false;
-			if (getClass() != obj.getClass())
-				return false;
-			Fixture other = (Fixture) obj;
-			if (away == null) {
-				if (other.away != null)
-					return false;
-			} else if (!away.equals(other.away))
-				return false;
-			if (home == null) {
-				if (other.home != null)
-					return false;
-			} else if (!home.equals(other.home))
-				return false;
-			if (score == null) {
-				if (other.score != null)
-					return false;
-			} else if (!score.equals(other.score))
-				return false;
-			if (time == null) {
-				if (other.time != null)
-					return false;
-			} else if (!time.equals(other.time))
-				return false;
-			return true;
-		}
-
-		@Override
 		public String toString() {
 			return "Fixture [time=" + time + ", home=" + home + ", away="
 					+ away + ", score=" + score + "]";
 		}
-		
-		
-		
-		
 	}
-	
-	
-
-
 
 	public void enterDateInMatchDatePicker(String date) {
 		driver.findElement(By.id("match-date")).clear();
 		driver.findElement(By.id("match-date")).sendKeys(date);
 		driver.findElement(By.cssSelector("div.title.ng-scope")).click();
-		
 	}
 
-
-	public void selectCompetition(String competetion) {
-		new Select(driver.findElement(By.id("competition-list"))).selectByVisibleText(competetion);
-	}
-	
 	public Set<Fixture> getFixturesFromTable() {
-				
 		Set<Fixture> list = new HashSet<Fixture>();
-
 		List<WebElement> times = driver.findElements(By.xpath("//div[@class='game-date ng-binding']"));
 		List<WebElement> homeTeams = driver.findElements(By.xpath("//div[@class='home-team']/span"));
 		List<WebElement> awayTeams = driver.findElements(By.xpath("//div[@class='away-team']/span"));
@@ -136,29 +83,27 @@ public class HomePage extends AbstractViewPage {
 			Fixture fixture = new Fixture(times.get(i).getText(), homeTeams.get(i).getText(), scores.get(i).getText(),  awayTeams.get(i).getText());
 			list.add(fixture);
 		}
-		
-		
 		return list;
 	}
 
-	
 	private By byDivXPath(String css) {
 		return By.xpath(String.format(XPATH_DIV_WITH_CLASS, css));
 	}
-	
-	
+
 	private By bySpanXPath(String css) {
 		return By.xpath(String.format(XPATH_SPAN_WITH_CLASS, css));
 	}
 	
 	public String getSelectedCompetition() {
-		cukesApp.waitUntilVisibilityOfElementLocated("competition-list");
-		return new Select(driver.findElement(By.id("competition-list"))).getFirstSelectedOption().getText();
+		return new Select(competitionList).getFirstSelectedOption().getText();
 	}
+
+    public HomePage selectCompetition(String visibleText) {
+        new Select(competitionList).selectByVisibleText(visibleText);
+        return this;
+    }
 
 	public String getMatchDayDate() {
-		return driver.findElement(By.id("match-date")).getText();
+		return matchDate.getText();
 	}
-
-
 }

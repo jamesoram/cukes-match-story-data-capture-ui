@@ -2,42 +2,40 @@ package cucumber.msdc.stepdefs;
 
 import static org.junit.Assert.*;
 
-import java.util.ArrayList;
-import java.util.List;
-
+import com.pressassociation.test.BaseWebDriverTest;
 import cucumber.api.DataTable;
-import cucumber.api.PendingException;
 import cucumber.api.java.After;
 import cucumber.api.java.Before;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import cucumber.msdc.TitleBar;
-import cucumber.msdc.pages.ConnectionManager;
 import cucumber.msdc.pages.utils.MatchSummaryPage;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author Shahnaaz Rahamatullah
  * @version 1.0
  */
-public class MatchSummaryPageStepDefinitions extends ConnectionManager {
+public class MatchSummaryPageStepDefinitions extends BaseWebDriverTest {
 	private MatchSummaryPage matchSummaryPage;
 
-	@Before()
-	public void setUp() {
-		super.setUp();
-	}
+    @Before
+    public void before() {
+        setUp();
+    }
 
-	@After()
-	public void tearDown() {
-
-		super.tearDown();
-	}
+    @After
+    public void after() {
+        tearDown();
+    }
 
 	@Given("^I am on the summary page for a particular match \"([^\"]*)\"$")
 	public void I_am_on_the_summary_page_for_a_particular_match(String matchId)
 			throws Throwable {
-		matchSummaryPage = new MatchSummaryPage(webDriver,
+		matchSummaryPage = new MatchSummaryPage(driver,
 				"http://msdc.devb.pacpservices.net/#/match-details/" + matchId);
 	}
 
@@ -327,7 +325,6 @@ public class MatchSummaryPageStepDefinitions extends ConnectionManager {
 						.getSrcForAwayTeam(), matchSummaryPage
 						.getHeightForAwayTeam(), matchSummaryPage
 						.getWidthForAwayTeam()));
-
 		expectedTitleBar.diff(actualTitleBar);
 
 	}

@@ -8,7 +8,7 @@
 #Date:
 #=========================================================================================
 
-JIRA Ticket:MSDC-60 
+#JIRA Ticket:MSDC-60
 #=========================================================================================
 Feature: As a Sports Information Processor When I am on Match summary page, I should be able to go back to Home page
 
