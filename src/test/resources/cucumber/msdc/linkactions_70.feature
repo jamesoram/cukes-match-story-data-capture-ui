@@ -8,7 +8,7 @@
 #Date:
 #=========================================================================================
 
-JIRA Ticket:MSDC-70
+#JIRA Ticket:MSDC-70
 #=========================================================================================
 Feature: As a Sports Information Processor, When I am on Match summary page I should be able to link actions.
 

@@ -9,7 +9,7 @@
 #Date:
 #=========================================================================================
 
-JIRA Ticket:MSDC-23
+#JIRA Ticket:MSDC-23
 #=========================================================================================
 Feature: As a Sports Information Processor, clicking on the date input or the calendar icon should launch a date picker.
 Each match day should be highlighted on the calendar.

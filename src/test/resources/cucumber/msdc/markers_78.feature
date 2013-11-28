@@ -8,7 +8,7 @@
 #Date:
 #=========================================================================================
 
-JIRA Ticket:MSDC-78 :Add Match start / end markers to Match Actions page
+#JIRA Ticket:MSDC-78 :Add Match start / end markers to Match Actions page
 #=========================================================================================
 Feature: Add "Kick Off", "Half Time", "Second Half Started" and "Full Time pseudo actions so that scroll-er moves on at the start / end of each half
 

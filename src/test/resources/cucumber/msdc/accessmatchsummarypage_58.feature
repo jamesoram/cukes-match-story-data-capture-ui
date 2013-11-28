@@ -8,7 +8,7 @@
 #Date:
 #=========================================================================================
 
-JIRA Ticket:MSDC-58 :As a Sports Information Processor I want to access the Match summary page by selecting a match from the list on home page
+#JIRA Ticket:MSDC-58 :As a Sports Information Processor I want to access the Match summary page by selecting a match from the list on home page
 #=========================================================================================
 Feature: As a Sports Information Processor I want to access the Match summary page by selecting a match from the list on home page
 

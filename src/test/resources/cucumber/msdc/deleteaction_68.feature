@@ -8,7 +8,7 @@
 #Date:
 #=========================================================================================
 
-JIRA Ticket:MSDC-68 :As a Sports Information Processor When I am on Match summary actions list view, I should be able to delete an action
+#JIRA Ticket:MSDC-68 :As a Sports Information Processor When I am on Match summary actions list view, I should be able to delete an action
 #=========================================================================================
 Feature: As a Sports Information Processor When I am on Match summary actions list view, I should be able to delete an action
 
