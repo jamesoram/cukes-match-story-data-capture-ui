@@ -26,11 +26,6 @@ public class MatchSummaryPage extends MatchSummaryPageElements {
 
 	}
 
-	public MatchSummaryPage(WebDriver webDriver) {
-		super(webDriver);
-
-	}
-
 	public Boolean isExclamationIconGreyedOut() {
 
 		for (WebElement icon : getMatchActionExclamationIcons()) {
@@ -83,14 +78,15 @@ public class MatchSummaryPage extends MatchSummaryPageElements {
 
 	}
 
-//    private boolean doAllElementsEqualCss(List<WebElement> elements, String css, String expectedValue) {
-//        Iterator iterator = elements.iterator();
-//        boolean allElementsCorrect = true;
-//
-//        while (iterator.hasNext() && allElementsCorrect) {
-//            String
-//        }
-//    }
+    private boolean doAllElementsEqualCss(List<WebElement> elements, String css, String expectedValue) {
+       for (WebElement element : elements) {
+           String cssValue = element.getCssValue(css);
+           if (!cssValue.equals(expectedValue)) {
+               return false;
+           }
+       }
+       return true;
+    }
 
 	public MatchSummaryPage clickMatchActionExclamationICon(int i) {
 		new Actions(driver).moveToElement(getAMatchActionExclamationICon(i))

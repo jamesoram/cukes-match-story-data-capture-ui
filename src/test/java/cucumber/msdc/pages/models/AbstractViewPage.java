@@ -4,23 +4,37 @@ archanaa
 package cucumber.msdc.pages.models;
 
 import com.pressassociation.test.PAWait;
-import org.openqa.selenium.By;
-import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.apache.commons.configuration.Configuration;
+import org.apache.commons.configuration.ConfigurationException;
+import org.apache.commons.configuration.PropertiesConfiguration;
+import org.apache.commons.io.FileUtils;
+import org.openqa.selenium.*;
+import org.openqa.selenium.remote.Augmenter;
 import org.openqa.selenium.support.ui.Select;
+
+import java.io.File;
+import java.io.IOException;
 
 public abstract class AbstractViewPage {
 
-    protected final WebDriver driver;
+    protected WebDriver driver;
     protected final PAWait wait;
     // TODO James Oram this should be loaded from the config file
     private final String baseUrl = "http://msdc.devb.pacpservices.net";
     protected HomePage homePage;
 
-	public AbstractViewPage(WebDriver driver) {
+    protected Configuration elementIdentifier;
+
+
+	public AbstractViewPage(WebDriver driver, String elementIdentifierLocation) {
 		this.driver = driver;
         wait = new PAWait(driver);
+        try {
+            elementIdentifier = new PropertiesConfiguration(elementIdentifierLocation);
+        } catch (ConfigurationException e) {
+            e.printStackTrace();
+            throw new RuntimeException(e);
+        }
 	}
 
     public void logOut() {
@@ -84,5 +98,24 @@ public abstract class AbstractViewPage {
         elem.click();
         elem.clear();
         elem.sendKeys(keys);
+    }
+
+    protected void takeScreenShot(RuntimeException e, String fileName) {
+        driver = new Augmenter().augment(driver);
+        File screenShot = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
+        try {
+            FileUtils.copyFile(screenShot, new File(fileName + ".png"));
+        } catch (IOException ioe) {
+            throw new RuntimeException(ioe.getMessage(), ioe);
+        }
+        throw e;
+    }
+
+    public void highlightElement(WebElement element) {
+        for (int i = 0; i < 2; i++) {
+            JavascriptExecutor js = (JavascriptExecutor) driver;
+            js.executeScript("arguments[0].setAttribute('style', arguments[1]);", element, "color: yellow; border: 10px solid yellow;");
+            js.executeScript("arguments[0].setAttribute('style', arguments[1]);", element, "");
+        }
     }
 }

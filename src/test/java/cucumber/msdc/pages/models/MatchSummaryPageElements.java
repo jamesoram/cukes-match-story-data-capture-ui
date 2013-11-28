@@ -11,7 +11,7 @@ import org.openqa.selenium.WebElement;
  * @author Shahnaaz Rahamatullah
  * @version 1.0
  */
-public class MatchSummaryPageElements extends KeyElements {
+public class MatchSummaryPageElements extends AbstractViewPage {
 
 	private static final String MATCH_SUMMARY_PAGE_ELEMENT_IDENTIFIER = "elementidentifier//matchsummarypage.properties";
 	private int actionNo;
