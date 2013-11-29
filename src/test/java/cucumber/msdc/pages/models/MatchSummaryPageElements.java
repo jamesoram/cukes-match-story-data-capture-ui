@@ -18,8 +18,7 @@ public class MatchSummaryPageElements extends AbstractViewPage {
 
 	protected MatchSummaryPageElements(WebDriver driver, String url){
 		super(driver,MATCH_SUMMARY_PAGE_ELEMENT_IDENTIFIER);
-		driver.get(url);	
-
+		driver.get(url);
 		try {
 			driver.findElements(By.xpath(elementIdentifier.getString("matchaction")));
 		} catch (NoSuchElementException e) {
@@ -78,7 +77,7 @@ public class MatchSummaryPageElements extends AbstractViewPage {
 		return actionNo;
 	}
 
-	protected void setActionNo(int actionNo) {
+	public void setActionNo(int actionNo) {
 
 		this.actionNo = actionNo;
 	}
