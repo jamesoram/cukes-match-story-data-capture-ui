@@ -25,10 +25,13 @@ public abstract class AbstractViewPage {
 
     protected Configuration elementIdentifier;
 
+    public AbstractViewPage(WebDriver driver) {
+        this.driver = driver;
+        wait = new PAWait(driver);
+    }
 
 	public AbstractViewPage(WebDriver driver, String elementIdentifierLocation) {
-		this.driver = driver;
-        wait = new PAWait(driver);
+        this(driver);
         try {
             elementIdentifier = new PropertiesConfiguration(elementIdentifierLocation);
         } catch (ConfigurationException e) {
