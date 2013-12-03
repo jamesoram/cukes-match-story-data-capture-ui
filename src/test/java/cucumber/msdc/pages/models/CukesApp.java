@@ -70,11 +70,11 @@ public class CukesApp {
 				By.xpath("//a[@title='Log off the CodeTrack System']")).click();
 	}
 
-	public HomePage gotoHomePage() {
+	public void gotoHomePage() {
 		webDriver.get(baseUrl);
-		homePage = new HomePage( this);
-		return homePage;
+		webDriver.findElement(By.linkText("Log In")).click();	
 		
+		homePage = new HomePage(this);
 	}
 
 	public boolean isLoggedIn() {
