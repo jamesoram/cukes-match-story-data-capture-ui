@@ -1,6 +1,5 @@
 package cucumber.msdc.stepdefs;
 
-import com.pressassociation.test.BaseWebDriverTest;
 import cucumber.api.DataTable;
 import cucumber.api.PendingException;
 import cucumber.api.java.After;
@@ -22,9 +21,7 @@ import cucumber.msdc.pages.models.HomePage.Fixture;
  * 
  */
 
-public class ListOfMatchesSteps extends BaseWebDriverTest {
-
-	private HomePage homePage;
+public class ListOfMatchesSteps extends AbstractSteps {
 
     @Before
     public void before() {

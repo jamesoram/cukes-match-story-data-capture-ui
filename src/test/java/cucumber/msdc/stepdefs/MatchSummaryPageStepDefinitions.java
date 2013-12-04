@@ -2,7 +2,6 @@ package cucumber.msdc.stepdefs;
 
 import static org.junit.Assert.*;
 
-import com.pressassociation.test.BaseWebDriverTest;
 import cucumber.api.DataTable;
 import cucumber.api.java.After;
 import cucumber.api.java.Before;
@@ -10,7 +9,9 @@ import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import cucumber.msdc.TitleBar;
-import cucumber.msdc.pages.utils.MatchSummaryPage;
+import cucumber.msdc.pages.models.LoginPage;
+import cucumber.msdc.pages.models.MatchSummaryPage;
+import org.junit.Assert;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,12 +21,15 @@ import java.util.Map;
  * @author Shahnaaz Rahamatullah
  * @version 1.0
  */
-public class MatchSummaryPageStepDefinitions extends BaseWebDriverTest {
+public class MatchSummaryPageStepDefinitions extends AbstractSteps {
+
 	private MatchSummaryPage matchSummaryPage;
 
     @Before
     public void before() {
         setUp();
+        goToHomePage();
+        homePage = new LoginPage(driver).login("", "");
     }
 
     @After
@@ -33,11 +37,19 @@ public class MatchSummaryPageStepDefinitions extends BaseWebDriverTest {
         tearDown();
     }
 
+    @Given("^I have the following selection:$")
+    public void I_have_the_following_selection(DataTable dataTable) throws Throwable {
+        List<Map<String, String>> strings = dataTable.asMaps();
+        for (Map<String, String> map : strings) {
+            homePage.selectCompetition(map.get("Competition"));
+            homePage.enterDateInMatchDatePicker(map.get("Date"));
+        }
+    }
+
 	@Given("^I am on the summary page for a particular match \"([^\"]*)\"$")
 	public void I_am_on_the_summary_page_for_a_particular_match(String matchId)
 			throws Throwable {
-		matchSummaryPage = new MatchSummaryPage(driver,
-				"http://msdc.devb.pacpservices.net/#/match-details/" + matchId);
+		matchSummaryPage = new MatchSummaryPage(driver);
 	}
 
 	@Then("^I should see the actions list displayed in descending order of time$")
@@ -329,4 +341,14 @@ public class MatchSummaryPageStepDefinitions extends BaseWebDriverTest {
 		expectedTitleBar.diff(actualTitleBar);
 
 	}
+
+    @When("^I click on right arrow button for a match$")
+    public void I_click_on_right_arrow_button_for_a_match() {
+        homePage.clickFirstMatchArrow();
+    }
+
+    @Then("^I should be taken to the match summary page$")
+    public void I_should_be_taken_to_the_match_summary_page() {
+        Assert.assertTrue(new MatchSummaryPage(driver).isPageLoaded());
+    }
 }

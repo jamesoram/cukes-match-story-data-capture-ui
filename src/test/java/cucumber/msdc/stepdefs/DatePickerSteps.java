@@ -1,6 +1,5 @@
 package cucumber.msdc.stepdefs;
 
-import com.pressassociation.test.BaseWebDriverTest;
 import cucumber.api.DataTable;
 import cucumber.api.java.After;
 import cucumber.api.java.Before;
@@ -16,16 +15,13 @@ import java.util.Set;
 
 import org.junit.Assert;
 
-import cucumber.msdc.pages.models.HomePage;
+public class DatePickerSteps extends AbstractSteps {
 
-public class DatePickerSteps extends BaseWebDriverTest {
-
-    private HomePage homePage;
 
 	@Before
 	public void before() {
 		setUp();
-        homePage = new HomePage(driver);
+        goToHomePage();
 	}
 
 	@After
@@ -123,6 +119,6 @@ public class DatePickerSteps extends BaseWebDriverTest {
 	public void the_selected_date_should_be_displayed_in_the_date_field()
 			throws Throwable {
 		Assert.assertEquals("Input date is not updated in date picker",
-				newDate, homePage.getMatchDayDate());
+                newDate, homePage.getMatchDayDate());
 	}
 }

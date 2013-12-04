@@ -25,6 +25,9 @@ public class HomePage extends AbstractViewPage {
     @FindBy(id = "match-date")
     private WebElement matchDate;
 
+    @FindBy(xpath = "//div[@ng-switch-when='true'][1]/a")
+    private WebElement firstMatchButton;
+
 	private static final String XPATH_DIV_WITH_CLASS="//div[@class=\"%s\"]";
 	private static final String XPATH_SPAN_WITH_CLASS="//span[@class=\"%s\"]";
 
@@ -75,6 +78,11 @@ public class HomePage extends AbstractViewPage {
 		driver.findElement(By.cssSelector("div.title.ng-scope")).click();
         return this;
 	}
+
+    public MatchSummaryPage clickFirstMatchArrow() {
+        firstMatchButton.click();
+        return new MatchSummaryPage(driver);
+    }
 
 	public Set<Fixture> getFixturesFromTable() {
 		Set<Fixture> list = new HashSet<Fixture>();
