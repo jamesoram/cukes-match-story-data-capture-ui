@@ -17,7 +17,6 @@ import org.junit.Assert;
 
 public class DatePickerSteps extends AbstractSteps {
 
-
 	@Before
 	public void before() {
 		setUp();
