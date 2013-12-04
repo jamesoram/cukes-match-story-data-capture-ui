@@ -9,6 +9,7 @@ import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import cucumber.msdc.TitleBar;
+import cucumber.msdc.pages.models.HomePage;
 import cucumber.msdc.pages.models.LoginPage;
 import cucumber.msdc.pages.models.MatchSummaryPage;
 import org.junit.Assert;
@@ -350,5 +351,15 @@ public class MatchSummaryPageStepDefinitions extends AbstractSteps {
     @Then("^I should be taken to the match summary page$")
     public void I_should_be_taken_to_the_match_summary_page() {
         Assert.assertTrue(new MatchSummaryPage(driver).isPageLoaded());
+    }
+
+    @When("^I see the list of matches$")
+    public void I_see_the_list_of_matches() throws Throwable {
+        // this step requires no code
+    }
+
+    @Then("^the right arrow button is not seen$")
+    public void the_right_arrow_button_is_not_seen() throws Throwable {
+        Assert.assertFalse(new HomePage(driver).isFirstMatchButtonVisible());
     }
 }

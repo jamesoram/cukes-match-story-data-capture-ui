@@ -5,8 +5,6 @@ import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
 
-import junit.framework.Assert;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -140,6 +138,14 @@ public class HomePage extends AbstractViewPage {
 		return days;
 		
 	}
+
+    public boolean isFirstMatchButtonVisible() {
+        try {
+            return firstMatchButton.isDisplayed();
+        } catch (Exception e) {
+            return false;
+        }
+    }
 
 	public String getDayInGrey() {
 		String matchDaysXPath = "table//td[contains(@class, 'highlightToday')]/a";
