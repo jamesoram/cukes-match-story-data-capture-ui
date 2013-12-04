@@ -3,6 +3,9 @@ package cucumber.msdc.pages.models;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.TreeSet;
+
+import junit.framework.Assert;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -66,10 +69,11 @@ public class HomePage extends AbstractViewPage {
 		}
 	}
 
-	public void enterDateInMatchDatePicker(String date) {
+	public HomePage enterDateInMatchDatePicker(String date) {
 		driver.findElement(By.id("match-date")).clear();
 		driver.findElement(By.id("match-date")).sendKeys(date);
 		driver.findElement(By.cssSelector("div.title.ng-scope")).click();
+        return this;
 	}
 
 	public Set<Fixture> getFixturesFromTable() {
@@ -104,6 +108,34 @@ public class HomePage extends AbstractViewPage {
     }
 
 	public String getMatchDayDate() {
-		return matchDate.getText();
+		clickOnDatePicker();
+		return matchDate.getAttribute("value");
+	}
+
+	public HomePage clickOnDatePicker() {
+		wait.waitUntilVisibilityOfElementLocated("match-date");
+		matchDate.click();
+		wait.waitUntilVisibilityOfElementLocated(By.xpath("//table[@class='ui-datepicker-calendar']//a[1]"));
+        return this;
+	}
+
+	public Set<String> getMatchDaysFromCalendar() {
+		clickOnDatePicker();
+		WebElement element = driver.findElement(By.id("ui-datepicker-div"));
+		
+		String matchDaysXPath = "table//td[contains(@class, 'highlightMatchDay')]/a";
+		List<WebElement> elements = element.findElements(By.xpath(matchDaysXPath));
+		Set<String> days = new TreeSet<String>();
+		for(WebElement e : elements) {
+			days.add(e.getText());
+		}
+		return days;
+		
+	}
+
+	public String getDayInGrey() {
+		String matchDaysXPath = "table//td[contains(@class, 'highlightToday')]/a";
+		WebElement element = driver.findElement(By.id("ui-datepicker-div"));
+		return element.findElement(By.xpath(matchDaysXPath)).getText();
 	}
 }

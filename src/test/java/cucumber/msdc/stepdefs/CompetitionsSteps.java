@@ -15,7 +15,6 @@ public class CompetitionsSteps extends AbstractSteps {
 	@Before
 	public void setUp() {
 		intSetUp();
-		cukesApp.sleep(1000);
 	}
 
 	@After
