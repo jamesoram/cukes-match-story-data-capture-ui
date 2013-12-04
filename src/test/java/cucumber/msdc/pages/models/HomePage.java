@@ -71,8 +71,9 @@ public class HomePage extends AbstractViewPage {
 	}
 
 	public HomePage enterDateInMatchDatePicker(String date) {
-		driver.findElement(By.id("match-date")).clear();
-		driver.findElement(By.id("match-date")).sendKeys(date);
+        wait.waitUntilVisibilityOfElementLocated(By.xpath("id('match-date')"));
+		matchDate.clear();
+        matchDate.sendKeys(date);
 		driver.findElement(By.cssSelector("div.title.ng-scope")).click();
         return this;
 	}
@@ -152,4 +153,12 @@ public class HomePage extends AbstractViewPage {
 		WebElement element = driver.findElement(By.id("ui-datepicker-div"));
 		return element.findElement(By.xpath(matchDaysXPath)).getText();
 	}
+
+    public boolean isPageLoaded() {
+        try {
+            return competitionList.isDisplayed() && matchDate.isDisplayed();
+        } catch (Exception e) {
+            return false;
+        }
+    }
 }

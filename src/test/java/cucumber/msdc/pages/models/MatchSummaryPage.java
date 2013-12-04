@@ -24,6 +24,9 @@ public class MatchSummaryPage extends AbstractViewPage {
     @FindBy(css = ".teams")
     private WebElement teamsDiv;
 
+    @FindBy(css = ".back>a")
+    private WebElement backButton;
+
 	private static final String MATCH_SUMMARY_PAGE_ELEMENT_IDENTIFIER = "elementidentifier//matchsummarypage.properties";
 	private int actionNo;
 
@@ -362,5 +365,10 @@ public class MatchSummaryPage extends AbstractViewPage {
 
         }
         return true;
+    }
+
+    public HomePage clickBackButton() {
+        backButton.click();
+        return new HomePage(driver);
     }
 }

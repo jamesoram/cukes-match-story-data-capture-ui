@@ -14,7 +14,7 @@
 Feature: Adding new actions
 
 Scenario: 01 - Clicking Add button links through to Data Capture screen
-Given I am on match summary page
+Given I am on the match summary page
 And I click action at certain time
 When I click on add action button
 Then I should be taken to Data capture screen
@@ -28,7 +28,6 @@ And I click action at certain time
 When I click on add action button
 Then I should be taken to Data capture screen
 And the time at playing to shown on Data capture screen
-
 
 
 Scenario: 03 - Clicking Add button while pause

@@ -362,4 +362,19 @@ public class MatchSummaryPageStepDefinitions extends AbstractSteps {
     public void the_right_arrow_button_is_not_seen() throws Throwable {
         Assert.assertFalse(new HomePage(driver).isFirstMatchButtonVisible());
     }
+
+    @Given("^I am on the match summary page$")
+    public void I_am_on_match_summary_page() {
+       // no code necessary for this step
+    }
+
+    @When("^I click on back button$")
+    public void I_click_on_back_button() {
+        new MatchSummaryPage(driver).clickBackButton();
+    }
+
+    @Then("^I should be on the home page$")
+    public void should_be_on_home_page() {
+        Assert.assertTrue(new HomePage(driver).isPageLoaded());
+    }
 }
