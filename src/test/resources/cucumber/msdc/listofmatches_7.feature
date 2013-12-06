@@ -35,13 +35,13 @@ Scenario: 02 - Green right arrow on the Match row indicates that there is existi
   Then I should see existing data entry for that match
   
 #TODO when dev work is complete
-Scenario: 03 - Grey right arrow on the Match row indicates that there is NO existing data entry
+Scenario: 03 - Red right arrow on the Match row indicates that there is NO existing data entry
   Given I am on the home page
   And I have the following selection with existing data for a match:
 	|Competition              |Date                |
     |Barclays Premier League  |Sun, 27 Oct, 2013   |
   And I see list of matches
-  When I click on the grey right arrow for a match
+  When I click on the red right arrow for a match
   Then I should see no existing data entry for that match
 
 Scenario: 04 - Empty list of matches for a competition

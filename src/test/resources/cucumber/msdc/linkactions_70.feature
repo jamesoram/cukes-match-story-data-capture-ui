@@ -38,7 +38,7 @@ Scenario: 02 - Click on the description highlights the action
 	Then the action row should highlight
 
 
-Scenario: 03 - Click on the description highlights the action
+Scenario: 03 - Click on the description highlights the action for the current selection
 	When I click on an action A description
 	And I click on an action B description
 	Then the action row for B should highlight
@@ -58,11 +58,18 @@ Scenario: 05 - Select a series of action rows using keyboard and mouse access (S
 
 Scenario: 06 - Can not multi select items that have already been linked
     When I link action A
-    And I click on a action Adescription
+    And I click on a action A description
     Then the action row should not be highlighted 
 
-Scenario: 07 - When the unlink button is used on a linked action all the links are removed
+Scenario: 07 - Unlink button will remove all the linked actions in a group for one group
+    When I link a group
+    And I click on one of the linked action
+    And I click on unlink button
+    Then link should be removed
 
-
-
-
+Scenario: 08 - Unlink a group when 2 groups are one after the other 
+    When I link 2 groups next to each other
+    And I click on one of the linked action
+    And I click on unlink button
+    Then link should be removed for the selected group
+    And the other group should remain linked
