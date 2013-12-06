@@ -364,17 +364,72 @@ public class MatchSummaryPageStepDefinitions extends AbstractSteps {
     }
 
     @Given("^I am on the match summary page$")
+    public void I_am_on_the_match_summary_page() {
+       matchSummaryPage = new HomePage(driver).clickFirstMatchArrow();
+    }
+
+    @Given("^I am on match summary page$")
     public void I_am_on_match_summary_page() {
-       // no code necessary for this step
+        I_am_on_the_match_summary_page();
     }
 
     @When("^I click on back button$")
     public void I_click_on_back_button() {
-        new MatchSummaryPage(driver).clickBackButton();
+        matchSummaryPage.clickBackButton();
     }
 
     @Then("^I should be on the home page$")
     public void should_be_on_home_page() {
         Assert.assertTrue(new HomePage(driver).isPageLoaded());
+    }
+
+    @Given("^I click on the play button$")
+    public void I_click_on_play_button() {
+        matchSummaryPage.clickPlayButton();
+    }
+
+    @When("^I click on the pause button$")
+    public void I_click_on_pause_button() {
+        matchSummaryPage.clickPauseButton();
+    }
+
+    @Then("^the timer should stop ticking$")
+    public void timer_should_stop_ticking() {
+        Assert.assertTrue(new MatchSummaryPage(driver).isTimerStopped());
+    }
+
+    @Then("^time stamp is correctly displayed in yellow$")
+    public void time_stamp_is_correctly_displayed_in_yellow() {
+        Assert.assertTrue(matchSummaryPage.isTimerPaused());
+    }
+
+    @Then("^play button is shown$")
+    public void play_button_is_shown() {
+        Assert.assertTrue(matchSummaryPage.isPlayButtonVisible());
+    }
+
+    @When("^I click on the forward button$")
+    public void I_click_on_forward_button() {
+        matchSummaryPage = matchSummaryPage.clickForwardButton();
+    }
+
+    @Then("^action list scrolls to the last action$")
+    public void action_list_scrolls_to_the_last_action() {
+        Assert.assertTrue(matchSummaryPage.isLastActionAtEndOfMatch());
+    }
+
+    @When("^I click on rewind button$")
+    public void I_click_on_rewind_button() {
+        matchSummaryPage = matchSummaryPage.clickRewindButton();
+    }
+
+    @Then("^the action list scrolls to the Kick-Off$")
+    public void action_list_scrolls_to_the_Kick_Off() {
+        Assert.assertTrue(matchSummaryPage.isKickOffMessageVisible());
+    }
+
+    @Then("^timer resets to (\\d+):(\\d+) in yellow$")
+    public void timer_resets_to_in_yellow(int minutes, int seconds) {
+       Assert.assertTrue(matchSummaryPage.isTimerResetTo(minutes, seconds));
     }
 }

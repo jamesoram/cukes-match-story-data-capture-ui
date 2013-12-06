@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
 
+import com.google.common.base.Strings;
 import org.joda.time.Duration;
 import org.joda.time.Period;
 import org.joda.time.format.PeriodFormatter;
@@ -13,6 +14,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.CacheLookup;
 import org.openqa.selenium.support.FindBy;
 
 /**
@@ -24,8 +26,35 @@ public class MatchSummaryPage extends AbstractViewPage {
     @FindBy(css = ".teams")
     private WebElement teamsDiv;
 
+    @CacheLookup
     @FindBy(css = ".back>a")
     private WebElement backButton;
+
+    @FindBy(xpath = "//div[@class='match-action'][1]/div/input[@class='delete']")
+    private WebElement firstDeleteButton;
+
+    @FindBy(id = "play")
+    private WebElement playButton;
+
+    @FindBy(id = "normal-time")
+    private WebElement timer;
+
+    @FindBy(id = "time")
+    private WebElement timerDiv;
+
+    @CacheLookup
+    @FindBy(id = "forward")
+    private WebElement forwardButton;
+
+    @FindBy(css = ".current-action>.time>span")
+    private WebElement currentActionTime;
+
+    @CacheLookup
+    @FindBy(id = "rewind")
+    private WebElement rewindButton;
+
+    @FindBy(id = "match-start")
+    private WebElement kickOffDiv;
 
 	private static final String MATCH_SUMMARY_PAGE_ELEMENT_IDENTIFIER = "elementidentifier//matchsummarypage.properties";
 	private int actionNo;
@@ -370,5 +399,74 @@ public class MatchSummaryPage extends AbstractViewPage {
     public HomePage clickBackButton() {
         backButton.click();
         return new HomePage(driver);
+    }
+
+    public MatchSummaryPage clickPlayButton() {
+        wait.forElementVisible(firstDeleteButton);
+        playButton.click();
+        return this;
+    }
+
+    public MatchSummaryPage clickPauseButton() {
+        return clickPlayButton();
+    }
+
+    public boolean isTimerStopped() {
+        String time = timer.getText();
+        // incredible - a legitimate use of wait.sleep!
+        wait.sleep(1500);
+        return time.equals(timer.getText());
+    }
+
+    public boolean isTimerPaused() {
+        try {
+            return timerDiv.getAttribute("class").contains("paused");
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
+    public boolean isPlayButtonVisible() {
+        return Strings.isNullOrEmpty(playButton.getAttribute("css"));
+    }
+
+    public MatchSummaryPage clickForwardButton() {
+        wait.forElementVisible(firstDeleteButton);
+        forwardButton.click();
+        return this;
+    }
+
+    public boolean isLastActionAtEndOfMatch() {
+        try {
+            // we assume that minute 90 or more is the last action
+            return currentActionTime.getText().contains("90:00");
+        } catch (Exception failed) {
+            return false;
+        }
+    }
+
+    public MatchSummaryPage clickRewindButton() {
+        wait.forElementVisible(firstDeleteButton);
+        rewindButton.click();
+        return this;
+    }
+
+    public boolean isKickOffMessageVisible() {
+        try {
+            return kickOffDiv.isDisplayed();
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
+    public boolean isTimerResetTo(int minutes, int seconds) {
+        try {
+            String[] time = timer.getText().split(":");
+            time[0].replace(":", "");
+            return time[1].contains(String.valueOf(minutes)) && time[0].contains(String.valueOf(seconds));
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
     }
 }
