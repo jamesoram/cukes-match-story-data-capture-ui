@@ -15,13 +15,13 @@ Feature: As a Sports Information Processor - Timer Function
 
 Scenario: 01 - Clicking PLAY button starts the timer from 0:00 and starts the timer ticking
 Given I am on match summary page
-When I click on play button
-Then the timer starts from 0:00
-And timer starts ticking
+When I click on the play button
+Then the timer starts from 00:00
+And the timer starts ticking
 And actions drop in from the top when the timer reaches their time stamp
 And the pause button is shown
 
-Scenario: 02 - Clicking REWIND button 
+Scenario: 02 - Clicking REWIND button
 Given I am on match summary page
 When I click on rewind button
 Then the action list scrolls to the Kick-Off
