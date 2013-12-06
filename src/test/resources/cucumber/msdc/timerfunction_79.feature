@@ -24,21 +24,21 @@ And the pause button is shown
 Scenario: 02 - Clicking REWIND button 
 Given I am on match summary page
 When I click on rewind button
-Then action list scrolls to the Kick-Off
-And timer resets to 0:00 in yellow
+Then the action list scrolls to the Kick-Off
+And timer resets to 00:00 in yellow
 And play button is shown
 
 Scenario: 03 - Clicking FORWARD button
 Given I am on match summary page
-When I click on forward button
-Then action list scrolls to the last action
+When I click on the forward button
+Then the action list scrolls to the last action
 And time stamp is correctly displayed in yellow
 And play button is shown
 
 Scenario: 04 - Clicking PAUSE button
 Given I am on match summary page
-And I click on play button
-When I click on pause button
-Then timer should stop ticking
+And I click on the play button
+When I click on the pause button
+Then the timer should stop ticking
 And time stamp is correctly displayed in yellow
 And play button is shown

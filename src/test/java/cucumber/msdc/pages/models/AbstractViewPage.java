@@ -25,7 +25,7 @@ public abstract class AbstractViewPage {
 
     public AbstractViewPage(WebDriver driver) {
         this.driver = driver;
-        wait = new PAWait(driver);
+        wait = new PAWait(driver, 30);
         PageFactory.initElements(driver, this);
     }
 

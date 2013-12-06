@@ -12,7 +12,7 @@ import org.junit.runner.RunWith;
 @RunWith(Cucumber.class)
 @CucumberOptions(
   format = {"html:target/cucumber-html-report/features/matchsummarypage"},
-  features = "src/test/resources/cucumber/msdc/backbuttonfromMSpage_60.feature"//,
+  features = "src/test/resources/cucumber/msdc/timerfunction_79.feature:24"//,
  // tags = {"@Complete"}
 )
 public class TestRunner {
