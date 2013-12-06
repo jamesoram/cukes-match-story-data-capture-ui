@@ -2,7 +2,6 @@ package cucumber.msdc.stepdefs;
 
 import static org.junit.Assert.*;
 
-import com.pressassociation.test.BaseWebDriverTest;
 import cucumber.api.DataTable;
 import cucumber.api.java.After;
 import cucumber.api.java.Before;
@@ -10,21 +9,28 @@ import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import cucumber.msdc.TitleBar;
-import cucumber.msdc.pages.utils.MatchSummaryPage;
+import cucumber.msdc.pages.models.HomePage;
+import cucumber.msdc.pages.models.LoginPage;
+import cucumber.msdc.pages.models.MatchSummaryPage;
+import org.junit.Assert;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author Shahnaaz Rahamatullah
  * @version 1.0
  */
-public class MatchSummaryPageStepDefinitions extends BaseWebDriverTest {
+public class MatchSummaryPageStepDefinitions extends AbstractSteps {
+
 	private MatchSummaryPage matchSummaryPage;
 
     @Before
     public void before() {
         setUp();
+        goToHomePage();
+        homePage = new LoginPage(driver).login("", "");
     }
 
     @After
@@ -32,11 +38,19 @@ public class MatchSummaryPageStepDefinitions extends BaseWebDriverTest {
         tearDown();
     }
 
+    @Given("^I have the following selection:$")
+    public void I_have_the_following_selection(DataTable dataTable) throws Throwable {
+        List<Map<String, String>> strings = dataTable.asMaps();
+        for (Map<String, String> map : strings) {
+            homePage.selectCompetition(map.get("Competition"));
+            homePage.enterDateInMatchDatePicker(map.get("Date"));
+        }
+    }
+
 	@Given("^I am on the summary page for a particular match \"([^\"]*)\"$")
 	public void I_am_on_the_summary_page_for_a_particular_match(String matchId)
 			throws Throwable {
-		matchSummaryPage = new MatchSummaryPage(driver,
-				"http://msdc.devb.pacpservices.net/#/match-details/" + matchId);
+		matchSummaryPage = new MatchSummaryPage(driver);
 	}
 
 	@Then("^I should see the actions list displayed in descending order of time$")
@@ -328,4 +342,94 @@ public class MatchSummaryPageStepDefinitions extends BaseWebDriverTest {
 		expectedTitleBar.diff(actualTitleBar);
 
 	}
+
+    @When("^I click on right arrow button for a match$")
+    public void I_click_on_right_arrow_button_for_a_match() {
+        homePage.clickFirstMatchArrow();
+    }
+
+    @Then("^I should be taken to the match summary page$")
+    public void I_should_be_taken_to_the_match_summary_page() {
+        Assert.assertTrue(new MatchSummaryPage(driver).isPageLoaded());
+    }
+
+    @When("^I see the list of matches$")
+    public void I_see_the_list_of_matches() throws Throwable {
+        // this step requires no code
+    }
+
+    @Then("^the right arrow button is not seen$")
+    public void the_right_arrow_button_is_not_seen() throws Throwable {
+        Assert.assertFalse(new HomePage(driver).isFirstMatchButtonVisible());
+    }
+
+    @Given("^I am on the match summary page$")
+    public void I_am_on_the_match_summary_page() {
+       matchSummaryPage = new HomePage(driver).clickFirstMatchArrow();
+    }
+
+    @Given("^I am on match summary page$")
+    public void I_am_on_match_summary_page() {
+        I_am_on_the_match_summary_page();
+    }
+
+    @When("^I click on back button$")
+    public void I_click_on_back_button() {
+        matchSummaryPage.clickBackButton();
+    }
+
+    @Then("^I should be on the home page$")
+    public void should_be_on_home_page() {
+        Assert.assertTrue(new HomePage(driver).isPageLoaded());
+    }
+
+    @Given("^I click on the play button$")
+    public void I_click_on_play_button() {
+        matchSummaryPage.clickPlayButton();
+    }
+
+    @When("^I click on the pause button$")
+    public void I_click_on_pause_button() {
+        matchSummaryPage.clickPauseButton();
+    }
+
+    @Then("^the timer should stop ticking$")
+    public void timer_should_stop_ticking() {
+        Assert.assertTrue(new MatchSummaryPage(driver).isTimerStopped());
+    }
+
+    @Then("^time stamp is correctly displayed in yellow$")
+    public void time_stamp_is_correctly_displayed_in_yellow() {
+        Assert.assertTrue(matchSummaryPage.isTimerPaused());
+    }
+
+    @Then("^play button is shown$")
+    public void play_button_is_shown() {
+        Assert.assertTrue(matchSummaryPage.isPlayButtonVisible());
+    }
+
+    @When("^I click on the forward button$")
+    public void I_click_on_forward_button() {
+        matchSummaryPage = matchSummaryPage.clickForwardButton();
+    }
+
+    @Then("^action list scrolls to the last action$")
+    public void action_list_scrolls_to_the_last_action() {
+        Assert.assertTrue(matchSummaryPage.isLastActionAtEndOfMatch());
+    }
+
+    @When("^I click on rewind button$")
+    public void I_click_on_rewind_button() {
+        matchSummaryPage = matchSummaryPage.clickRewindButton();
+    }
+
+    @Then("^the action list scrolls to the Kick-Off$")
+    public void action_list_scrolls_to_the_Kick_Off() {
+        Assert.assertTrue(matchSummaryPage.isKickOffMessageVisible());
+    }
+
+    @Then("^timer resets to (\\d+):(\\d+) in yellow$")
+    public void timer_resets_to_in_yellow(int minutes, int seconds) {
+       Assert.assertTrue(matchSummaryPage.isTimerResetTo(minutes, seconds));
+    }
 }

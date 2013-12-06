@@ -14,17 +14,15 @@ Feature: As a Sports Information Processor I want to access the Match summary pa
 
 Scenario: 01 - Access to Match summary page for a past match
 
-Given I am on home page
-And I have the following selection:
+Given I have the following selection:
 |Competition              |Date                |
 |Barclays Premier League  |Sun, 27 Oct, 2013   |
 When I click on right arrow button for a match
-Then the should be taken to match summary page
+Then I should be taken to the match summary page
 
 Scenario: 02 - Access to Match summary page for a future match
-Given I am on home page
-And I have the following selection:
+Given I have the following selection:
 |Competition              |Date                |
-|Barclays Premier League  |Sat, 12 Apr, 2014   |
-When I see list of match
-Then right arrow button is not seen
+|Barclays Premier League  |Sat, 12 Apr, 2016   |
+When I see the list of matches
+Then the right arrow button is not seen

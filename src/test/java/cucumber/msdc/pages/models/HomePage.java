@@ -3,6 +3,7 @@ package cucumber.msdc.pages.models;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.TreeSet;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -21,6 +22,9 @@ public class HomePage extends AbstractViewPage {
 
     @FindBy(id = "match-date")
     private WebElement matchDate;
+
+    @FindBy(xpath = "//div[@ng-switch-when='true'][1]/a")
+    private WebElement firstMatchButton;
 
 	private static final String XPATH_DIV_WITH_CLASS="//div[@class=\"%s\"]";
 	private static final String XPATH_SPAN_WITH_CLASS="//span[@class=\"%s\"]";
@@ -66,11 +70,18 @@ public class HomePage extends AbstractViewPage {
 		}
 	}
 
-	public void enterDateInMatchDatePicker(String date) {
-		driver.findElement(By.id("match-date")).clear();
-		driver.findElement(By.id("match-date")).sendKeys(date);
+	public HomePage enterDateInMatchDatePicker(String date) {
+        wait.waitUntilVisibilityOfElementLocated(By.xpath("id('match-date')"));
+		matchDate.clear();
+        matchDate.sendKeys(date);
 		driver.findElement(By.cssSelector("div.title.ng-scope")).click();
+        return this;
 	}
+
+    public MatchSummaryPage clickFirstMatchArrow() {
+        firstMatchButton.click();
+        return new MatchSummaryPage(driver);
+    }
 
 	public Set<Fixture> getFixturesFromTable() {
 		Set<Fixture> list = new HashSet<Fixture>();
@@ -104,6 +115,50 @@ public class HomePage extends AbstractViewPage {
     }
 
 	public String getMatchDayDate() {
-		return matchDate.getText();
+		clickOnDatePicker();
+		return matchDate.getAttribute("value");
 	}
+
+	public HomePage clickOnDatePicker() {
+		wait.waitUntilVisibilityOfElementLocated("match-date");
+		matchDate.click();
+		wait.waitUntilVisibilityOfElementLocated(By.xpath("//table[@class='ui-datepicker-calendar']//a[1]"));
+        return this;
+	}
+
+	public Set<String> getMatchDaysFromCalendar() {
+		clickOnDatePicker();
+		WebElement element = driver.findElement(By.id("ui-datepicker-div"));
+		
+		String matchDaysXPath = "table//td[contains(@class, 'highlightMatchDay')]/a";
+		List<WebElement> elements = element.findElements(By.xpath(matchDaysXPath));
+		Set<String> days = new TreeSet<String>();
+		for(WebElement e : elements) {
+			days.add(e.getText());
+		}
+		return days;
+		
+	}
+
+    public boolean isFirstMatchButtonVisible() {
+        try {
+            return firstMatchButton.isDisplayed();
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
+	public String getDayInGrey() {
+		String matchDaysXPath = "table//td[contains(@class, 'highlightToday')]/a";
+		WebElement element = driver.findElement(By.id("ui-datepicker-div"));
+		return element.findElement(By.xpath(matchDaysXPath)).getText();
+	}
+
+    public boolean isPageLoaded() {
+        try {
+            return competitionList.isDisplayed() && matchDate.isDisplayed();
+        } catch (Exception e) {
+            return false;
+        }
+    }
 }

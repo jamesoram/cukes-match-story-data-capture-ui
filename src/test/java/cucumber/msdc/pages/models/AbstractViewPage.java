@@ -10,6 +10,7 @@ import org.apache.commons.configuration.PropertiesConfiguration;
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.*;
 import org.openqa.selenium.remote.Augmenter;
+import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
 
 import java.io.File;
@@ -19,15 +20,13 @@ public abstract class AbstractViewPage {
 
     protected WebDriver driver;
     protected final PAWait wait;
-    // TODO James Oram this should be loaded from the config file
-    private final String baseUrl = "http://msdc.devb.pacpservices.net";
-    protected HomePage homePage;
 
     protected Configuration elementIdentifier;
 
     public AbstractViewPage(WebDriver driver) {
         this.driver = driver;
-        wait = new PAWait(driver);
+        wait = new PAWait(driver, 30);
+        PageFactory.initElements(driver, this);
     }
 
 	public AbstractViewPage(WebDriver driver, String elementIdentifierLocation) {
@@ -43,23 +42,6 @@ public abstract class AbstractViewPage {
     public void logOut() {
         driver.findElement(
                 By.xpath("//a[@title='Log off the CodeTrack System']")).click();
-    }
-
-    public HomePage gotoHomePage() {
-        driver.get(baseUrl);
-        homePage = new HomePage(driver);
-        return homePage;
-
-    }
-
-    public boolean isLoggedIn() {
-        driver.get(getUrl(""));
-        try {
-            gotoHomePage();
-            return true;
-        } catch (NoSuchElementException e) {
-            return false;
-        }
     }
 
     public void selectOption(By by, String text) {
@@ -81,9 +63,6 @@ public abstract class AbstractViewPage {
         String xpath = String.format("//button[text() ='%s']", buttonText);
         wait.waitUntilVisibilityOfElementLocated(By.xpath(xpath));
         driver.findElement(By.xpath(xpath)).click();
-    }
-    private String getUrl(String relativePath) {
-        return String.format("%s%s", baseUrl, relativePath);
     }
 
     /*

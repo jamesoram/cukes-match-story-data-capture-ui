@@ -12,8 +12,8 @@ import org.junit.runner.RunWith;
 @RunWith(Cucumber.class)
 @CucumberOptions(
   format = {"html:target/cucumber-html-report/features/matchsummarypage"},
- // features = "src/test/resources/cucumber/msdc/features/matchsummarypage/exclamation_icon_63.feature",
-  tags = {"@Complete"}
+  features = "src/test/resources/cucumber/msdc/timerfunction_79.feature:24"//,
+ // tags = {"@Complete"}
 )
 public class TestRunner {
 
