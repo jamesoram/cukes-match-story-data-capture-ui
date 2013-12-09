@@ -17,6 +17,5 @@ public abstract class AbstractSteps extends BaseWebDriverTest {
         driver.get(baseUrl);
         homePage = new HomePage(driver);
         return homePage;
-
     }
 }

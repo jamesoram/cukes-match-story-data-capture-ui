@@ -427,7 +427,13 @@ public class MatchSummaryPage extends AbstractViewPage {
     }
 
     public boolean isPlayButtonVisible() {
-        return Strings.isNullOrEmpty(playButton.getAttribute("css"));
+        try {
+            // when the class name is "pause", it means it's showing the pause icon
+            return !playButton.getAttribute("class").equals("pause");
+        } catch (Exception e) {
+            // if there is no class name it means play is being shown
+            return true;
+        }
     }
 
     public MatchSummaryPage clickForwardButton() {
@@ -459,14 +465,18 @@ public class MatchSummaryPage extends AbstractViewPage {
         }
     }
 
-    public boolean isTimerResetTo(int minutes, int seconds) {
+    public boolean isTimerSetTo(String minutes, String seconds) {
         try {
-            String[] time = timer.getText().split(":");
-            time[0].replace(":", "");
-            return time[1].contains(String.valueOf(minutes)) && time[0].contains(String.valueOf(seconds));
+            String[] time = getTimerArray(timer.getText());
+            return time[1].contains(minutes) && time[0].contains(seconds);
         } catch (Exception e) {
-            e.printStackTrace();
             return false;
         }
+    }
+
+    private String[] getTimerArray(String time) {
+        String[] times = time.split(":");
+        times[0].replace(":", "");
+        return times;
     }
 }
