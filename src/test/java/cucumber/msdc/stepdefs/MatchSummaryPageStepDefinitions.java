@@ -365,7 +365,8 @@ public class MatchSummaryPageStepDefinitions extends AbstractSteps {
 
     @Given("^I am on the match summary page$")
     public void I_am_on_the_match_summary_page() {
-       matchSummaryPage = new HomePage(driver).clickFirstMatchArrow();
+       matchSummaryPage = new HomePage(driver).clickOnDatePicker()
+               .enterDateInMatchDatePicker("Sun, 27 Oct, 2013").clickFirstMatchArrow();
     }
 
     @Given("^I am on match summary page$")
@@ -413,7 +414,7 @@ public class MatchSummaryPageStepDefinitions extends AbstractSteps {
         matchSummaryPage = matchSummaryPage.clickForwardButton();
     }
 
-    @Then("^action list scrolls to the last action$")
+    @Then("^the action list scrolls to the last action$")
     public void action_list_scrolls_to_the_last_action() {
         Assert.assertTrue(matchSummaryPage.isLastActionAtEndOfMatch());
     }
@@ -429,7 +430,28 @@ public class MatchSummaryPageStepDefinitions extends AbstractSteps {
     }
 
     @Then("^timer resets to (\\d+):(\\d+) in yellow$")
-    public void timer_resets_to_in_yellow(int minutes, int seconds) {
-       Assert.assertTrue(matchSummaryPage.isTimerResetTo(minutes, seconds));
+    public void timer_resets_to_in_yellow(String minutes, String seconds) {
+       Assert.assertTrue(matchSummaryPage.isTimerSetTo(minutes, seconds));
+       Assert.assertTrue(matchSummaryPage.isTimerPaused());
+    }
+
+    @Then("^the timer starts from (\\d+):(\\d+)$")
+    public void the_timer_starts_from_(String minutes, String seconds) {
+        Assert.assertTrue(matchSummaryPage.isTimerSetTo(minutes, seconds));
+    }
+
+    @Then("^the timer starts ticking$")
+    public void the_timer_starts_ticking() {
+        Assert.assertFalse(matchSummaryPage.isTimerPaused());
+    }
+
+    @Then("^actions drop in from the top when the timer reaches their time stamp$")
+    public void actions_drop_in_from_the_top_when_the_timer_reaches_their_time_stamp() {
+       // this is not easily automatable without having test data
+    }
+
+    @Then("^the pause button is shown$")
+    public void the_pause_button_is_shown() {
+       Assert.assertFalse(matchSummaryPage.isPlayButtonVisible());
     }
 }

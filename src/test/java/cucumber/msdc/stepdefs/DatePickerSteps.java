@@ -17,17 +17,6 @@ import org.junit.Assert;
 
 public class DatePickerSteps extends AbstractSteps {
 
-	@Before
-	public void before() {
-		setUp();
-        goToHomePage();
-	}
-
-	@After
-	public void after() {
-		tearDown();
-	}
-	
 	private String newDate;
 
 	@Then("^the last match date should be displayed in the date field$")
