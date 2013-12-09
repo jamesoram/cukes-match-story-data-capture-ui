@@ -365,7 +365,8 @@ public class MatchSummaryPageStepDefinitions extends AbstractSteps {
 
     @Given("^I am on the match summary page$")
     public void I_am_on_the_match_summary_page() {
-       matchSummaryPage = new HomePage(driver).clickFirstMatchArrow();
+       matchSummaryPage = new HomePage(driver).clickOnDatePicker()
+               .enterDateInMatchDatePicker("Sun, 27 Oct, 2013").clickFirstMatchArrow();
     }
 
     @Given("^I am on match summary page$")

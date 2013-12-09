@@ -23,17 +23,6 @@ import cucumber.msdc.pages.models.HomePage.Fixture;
 
 public class ListOfMatchesSteps extends AbstractSteps {
 
-    @Before
-    public void before() {
-        setUp();
-        driver.get("http://msdc.devb.pacpservices.net/");
-    }
-
-    @After
-    public void after() {
-        tearDown();
-    }
-
 	@Given("^I am on the home page$")
 	public void I_am_on_the_home_page() throws Throwable {
 		homePage = new HomePage(driver);
@@ -60,8 +49,6 @@ public class ListOfMatchesSteps extends AbstractSteps {
 			
 			Assert.assertTrue("Fixture does not exist: " + fixture, actualFixtures.contains(fixture));
 		}
-
-		
 	}
 	
 	@Then("^I should see an empty match list$")

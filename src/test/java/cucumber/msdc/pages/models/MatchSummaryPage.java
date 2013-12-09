@@ -427,7 +427,13 @@ public class MatchSummaryPage extends AbstractViewPage {
     }
 
     public boolean isPlayButtonVisible() {
-        return Strings.isNullOrEmpty(playButton.getAttribute("css"));
+        try {
+            // when the class name is "pause", it means it's showing the pause icon
+            return !playButton.getAttribute("class").equals("pause");
+        } catch (Exception e) {
+            // if there is no class name it means play is being shown
+            return true;
+        }
     }
 
     public MatchSummaryPage clickForwardButton() {
