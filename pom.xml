@@ -42,7 +42,7 @@
     <dependency>
       <groupId>com.pressassociation.test</groupId>
       <artifactId>ui_framework</artifactId>
-      <version>1.5-SNAPSHOT</version>
+      <version>1.6-SNAPSHOT</version>
     </dependency>
     <dependency>
       <groupId>joda-time</groupId>

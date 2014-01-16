@@ -23,6 +23,16 @@ import cucumber.msdc.pages.models.HomePage.Fixture;
 
 public class ListOfMatchesSteps extends AbstractSteps {
 
+    @Before
+    public void before() {
+        setUp();
+    }
+
+    @After
+    public void after() {
+        tearDown();
+    }
+
 	@Given("^I am on the home page$")
 	public void I_am_on_the_home_page() throws Throwable {
 		homePage = new HomePage(driver);
